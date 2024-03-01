@@ -18,6 +18,7 @@
 
 body {
   @apply bg-white;
+    font-family: Roboto, sans-serif;
 }
 
 @layer base {
@@ -27,6 +28,14 @@ body {
 @layer utilities {
   .shadow-4 {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5), 0px 15px 25px rgba(0, 0, 0, 0.15);
+ }
+
+ .shadow-3 {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12), 0px 3px 6px rgba(0, 0, 0, 0.25);
+ }
+
+ .shadow-3 {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.12);
  }
 
   .text-11 {
@@ -97,32 +106,68 @@ body {
 }
 
 @layer components {
+  /* Navigation Bar */
   .header {
-    @apply bg-primary-500 text-white flex flex-row justify-center items-center;
+    @apply bg-primary-500 fixed w-full h-[96px] text-white flex flex-row justify-between items-center shadow-3;
   }
 
   .header-title {
-    @apply flex-1 text-center text-11 tracking-wide text-bold;
+    @apply text-center mx-auto text-11 tracking-wide text-bold cursor-pointer;
+  }
+
+  .header-title:hover {
+    transform: scale(1.01);
   }
 
   .hamburger-menu {
-    @apply absolute top-0 left-0 p-4 text-6;
+    @apply p-4 text-6;
   }
 
-  .hamburger-menu:hover + .dropdown-menu {
-    display: block;
+  .hamburger-icon {
+    @apply h-[48px] w-[48px] cursor-pointer;
+  }
+
+  .hamburger-icon:hover {
+      transform: scale(1.05);
+  }
+
+  .account-icon {
+    @apply mx-2 h-[64px] w-[64px] cursor-pointer;
+  }
+
+  .account-icon:hover {
+    transform: scale(1.05);
   }
 
   .dropdown-menu {
-    @apply hidden relative top-3 text-6 w-[12vw] bg-gray-100 rounded-[5px] text-primary-800 py-4 shadow-4;
+    @apply absolute top-[10.5vh] text-6 w-[12vw] bg-gray-100 rounded-[5px] text-primary-800 py-4 shadow-4;
   }
 
   .dropdown-menu-item {
-    @apply px-4 py-1 text-left cursor-pointer transition-colors duration-300;
+    @apply px-4 py-1 text-left cursor-pointer;
   }
 
   .dropdown-menu-item:hover {
-    @apply bg-primary-700 text-white w-full; 
+    @apply bg-primary-700 text-white w-full text-bold; 
   }
+
+/* Home Page */
   
+  .home-page {
+    @apply flex flex-col items-center justify-center h-screen;
+  }
+
+  .btn-container {
+    @apply grid grid-cols-2 grid-rows-3 justify-center items-center w-[296px] h-[384px] gap-4;
+  }
+
+  .start-btn {
+    @apply col-span-2 row-span-1 text-11 text-bold flex text-center items-center tracking-wider justify-center bg-green-300 text-white rounded-[15px] w-full h-full shadow-3;
+  }
+
+  .app-btn {
+    @apply rounded-[15px] bg-primary-500 text-center flex justify-center items-center w-full h-full shadow-3;
+  }
+
+  /*  */
 }
