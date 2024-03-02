@@ -108,11 +108,11 @@ body {
 @layer components {
   /* Navigation Bar */
   .header {
-    @apply bg-primary-500 fixed w-full h-[96px] text-white flex flex-row justify-between items-center shadow-3;
+    @apply bg-primary-500 fixed w-full h-[72px] text-white flex flex-row justify-between items-center shadow-3;
   }
 
   .header-title {
-    @apply text-center mx-auto text-11 tracking-wide text-bold cursor-pointer;
+    @apply text-center mx-auto text-9 tracking-wide text-bold cursor-pointer;
   }
 
   .header-title:hover {
@@ -124,7 +124,7 @@ body {
   }
 
   .hamburger-icon {
-    @apply h-[48px] w-[48px] cursor-pointer;
+    @apply h-[36px] w-[36px] cursor-pointer;
   }
 
   .hamburger-icon:hover {
@@ -132,7 +132,7 @@ body {
   }
 
   .account-icon {
-    @apply mx-2 h-[64px] w-[64px] cursor-pointer;
+    @apply mr-1 h-[48px] w-[48px] cursor-pointer;
   }
 
   .account-icon:hover {
@@ -140,11 +140,11 @@ body {
   }
 
   .dropdown-menu {
-    @apply absolute top-[10.5vh] text-6 w-[12vw] bg-gray-100 rounded-[5px] text-primary-800 py-4 shadow-4;
+    @apply absolute top-[7.5vh] text-5 w-[12vw] bg-gray-100 rounded-[5px] text-primary-800 py-4 shadow-4;
   }
 
   .dropdown-menu-item {
-    @apply px-4 py-1 text-left cursor-pointer;
+    @apply px-4 py-1 text-left cursor-pointer bg-gray-200 border-t-[0.5px] border-b-[0.5px] border-gray-100;
   }
 
   .dropdown-menu-item:hover {
