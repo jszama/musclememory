@@ -127,15 +127,11 @@ body {
     @apply h-[36px] w-[36px] cursor-pointer;
   }
 
-  .hamburger-icon:hover {
-      transform: scale(1.05);
-  }
-
   .account-icon {
     @apply mr-1 h-[48px] w-[48px] cursor-pointer;
   }
-
-  .account-icon:hover {
+  
+  .hamburger-icon:hover, .account-icon:hover  {
     transform: scale(1.05);
   }
 
@@ -154,19 +150,27 @@ body {
 /* Home Page */
   
   .home-page {
-    @apply flex flex-col items-center justify-center h-screen;
+    @apply flex items-center justify-center h-screen;
   }
 
   .btn-container {
     @apply grid grid-cols-2 grid-rows-3 justify-center items-center w-[296px] h-[384px] gap-4;
   }
 
+  .start-btn, .app-btn {
+    @apply flex w-full h-full rounded-[15px] shadow-3 cursor-pointer justify-center items-center text-center;
+  }
+
   .start-btn {
-    @apply col-span-2 row-span-1 text-11 text-bold flex text-center items-center tracking-wider justify-center bg-green-300 text-white rounded-[15px] w-full h-full shadow-3;
+    @apply col-span-2 row-span-1 text-11 text-bold tracking-wider bg-green-300 text-white;
   }
 
   .app-btn {
-    @apply rounded-[15px] bg-primary-500 text-center flex justify-center items-center w-full h-full shadow-3;
+    @apply bg-primary-500;
+  }
+
+  .start-btn:hover, .app-btn:hover {
+    transform: scale(1.03);
   }
 
   /*  */
