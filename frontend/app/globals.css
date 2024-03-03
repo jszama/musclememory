@@ -26,6 +26,10 @@ body {
 }
 
 @layer utilities {
+  .shadow-5 {
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
   .shadow-4 {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5), 0px 15px 25px rgba(0, 0, 0, 0.15);
  }
@@ -34,8 +38,8 @@ body {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12), 0px 3px 6px rgba(0, 0, 0, 0.25);
  }
 
- .shadow-3 {
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.12);
+ .shadow-2 {
+   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.12);
  }
 
   .text-11 {
@@ -108,7 +112,7 @@ body {
 @layer components {
   /* Navigation Bar */
   .header {
-    @apply bg-primary-500 fixed w-full h-[72px] text-white flex flex-row justify-between items-center shadow-3;
+    @apply bg-primary-500 fixed w-full h-[72px] text-white flex flex-row justify-between items-center shadow-3 transition-all duration-500 ease-in-out;
   }
 
   .header-title {
@@ -116,7 +120,7 @@ body {
   }
 
   .header-title:hover {
-    transform: scale(1.01);
+    transform: scale(1.05);
   }
 
   .hamburger-menu {
@@ -131,8 +135,8 @@ body {
     @apply mr-1 h-[48px] w-[48px] cursor-pointer;
   }
   
-  .hamburger-icon:hover, .account-icon:hover  {
-    transform: scale(1.05);
+  .hamburger-icon:hover, .account-icon:hover {
+    transform: scale(1.1);
   }
 
   .dropdown-menu {
@@ -173,5 +177,17 @@ body {
     transform: scale(1.03);
   }
 
-  /*  */
+  /* Exercise bank */
+  .exercise-container {
+    @apply flex flex-row justify-around items-center text-center bg-gradient-to-t from-primary-600 to-primary-400 w-[80vw] h-[75vh] rounded-[15px] mt-8 shadow-5;
+  }
+
+  .exercise-container h1 {
+    @apply text-10 text-bold text-white cursor-pointer transition-transform duration-[250ms] ease-in-out; 
+  }
+
+  .exercise-container h1:hover {
+    @apply scale-[1.3];
+    text-shadow: 0px 0px 40px white;
+  }
 }
