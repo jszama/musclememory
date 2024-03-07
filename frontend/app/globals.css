@@ -42,6 +42,10 @@ body {
    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 5px rgba(0, 0, 0, 0.12);
  }
 
+ .shadow-1 {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.25);
+ }
+
   .text-11 {
     font-size: 72px;
   }
@@ -177,17 +181,67 @@ body {
     transform: scale(1.03);
   }
 
-  /* Exercise bank */
-  .exercise-container {
-    @apply flex flex-row justify-around items-center text-center bg-gradient-to-t from-primary-600 to-primary-400 w-[80vw] h-[75vh] rounded-[15px] mt-8 shadow-5;
+  /* Exercise menu */
+  .exercise-menu {
+    @apply flex justify-around items-center text-center bg-gradient-to-r from-primary-400 to-primary-600 w-[80vw] h-[75vh] rounded-[15px] mt-8 shadow-5 pr-4;
   }
 
-  .exercise-container h1 {
+  .exercise-menu h1 {
     @apply text-10 text-bold text-white cursor-pointer transition-transform duration-[250ms] ease-in-out; 
   }
 
-  .exercise-container h1:hover {
+  .exercise-menu h1:hover {
     @apply scale-[1.3];
     text-shadow: 0px 0px 40px white;
   }
+
+  /* Exercise Bank */
+  .exercise-container {
+    @apply flex flex-col justify-center mt-8 items-center w-[768px] h-[584px] bg-gray-100 border-t-primary-500 border-t-[10px] rounded-t-[5px] rounded-b-[15px] shadow-3
+  }
+
+  .exercise-search {
+    @apply flex w-[80%] h-[8%] bg-gray-200 text-start items-center p-2 shadow-1 text-6;
+  }
+
+  .exercise-bank {
+    @apply w-[80%] h-[70%] bg-gray-100 shadow-1 mt-8;
+  }
+
+  .search-filters {
+    @apply flex flex-row justify-between px-4 w-full h-[9%] bg-gray-200 text-start items-center p-2 text-6 border-b-2 border-b-gray-300;
+  }
+
+  .search-filters select {
+    @apply w-auto bg-gray-300/50 text-4 text-center rounded-[10px] text-primary-500 shadow-1;
+  }
+
+  .search-filters option{
+    @apply w-auto bg-gray-100 text-4 text-center rounded-[10px] text-primary-500 shadow-1;
+  }
+
+  .exercise-list {
+    @apply w-full h-[89%] flex flex-col pt-2 gap-1 overflow-auto;
+  }
+
+  .exercise-block {
+    @apply flex flex-col gap-1 text-primary-400 mx-2;
+  }
+
+  .exercise-block h2 {
+    @apply w-full border-b-[1.5px] border-b-primary-400 cursor-pointer mb-1;
+  }
+
+  .exercise-card {
+    @apply h-7 items-center text-5 bg-gray-200 text-primary-900 cursor-pointer rounded-[5px] px-1;
+  }
+
+  .exercise-card:hover {
+    @apply text-primary-700 shadow-1;
+  }
+ 
+  .exercise-info {
+    @apply hidden flex flex-row justify-between items-center p-2;
+  }
+
 }

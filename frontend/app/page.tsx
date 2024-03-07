@@ -8,11 +8,11 @@ export default function Home() {
         <section className='start-btn'>
           START
         </section>
-        <section className='app-btn'>
-          <Link href='/workouts'>
+        
+        <Link className='app-btn' href='/exercise-menu'>
             <Image src="/workouts.png" alt="Workouts" width={72} height={72} />
-          </Link>
-        </section>
+        </Link>
+
         <section className='app-btn'>
           <Image src="/statistics.png" alt="Statistics" width={72} height={72}/>
         </section>
