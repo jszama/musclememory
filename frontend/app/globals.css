@@ -155,6 +155,11 @@ body {
     @apply bg-primary-700 text-white w-full text-bold; 
   }
 
+/* Back Button */
+.back-btn {
+  @apply fixed bottom-0 left-0 m-2 flex items-center justify-center h-[48px] w-[48px] bg-gray-100 rounded-[5px] cursor-pointer; 
+}
+
 /* Home Page */
   
   .home-page {
