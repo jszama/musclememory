@@ -157,7 +157,7 @@ body {
 
 /* Back Button */
 .back-btn {
-  @apply fixed bottom-0 left-0 m-2 flex items-center justify-center h-[48px] w-[48px] bg-gray-100 rounded-[5px] cursor-pointer; 
+  @apply fixed bottom-0 left-0 m-2 flex items-center justify-center h-[48px] w-[48px] rounded-[5px] cursor-pointer; 
 }
 
 /* Home Page */
@@ -210,7 +210,7 @@ body {
   }
 
   .exercise-bank {
-    @apply w-[80%] h-[70%] bg-gray-100 shadow-1 mt-8;
+    @apply w-[80%] h-[70%] bg-gray-100 shadow-1 mt-6 rounded-t-[5px] rounded-b-[15px];
   }
 
   .search-filters {
@@ -218,7 +218,7 @@ body {
   }
 
   .search-filters select {
-    @apply w-auto bg-gray-300/50 text-4 text-center rounded-[10px] text-primary-500 shadow-1;
+    @apply w-auto bg-gray-300/50 text-4 text-center rounded-[10px] text-primary-500 shadow-1 cursor-pointer;
   }
 
   .search-filters option{
@@ -234,11 +234,11 @@ body {
   }
 
   .exercise-block h2 {
-    @apply w-full border-b-[1.5px] border-b-primary-400 cursor-pointer mb-1;
+    @apply w-full border-b-[1.5px] border-b-primary-400 mb-1;
   }
 
   .exercise-card {
-    @apply h-7 items-center text-5 bg-gray-200 text-primary-900 cursor-pointer rounded-[5px] px-1;
+    @apply h-7 items-center text-5 bg-gray-200 text-primary-900 cursor-pointer rounded-[5px] px-1 transition-all duration-150 ease-in-out;
   }
 
   .exercise-card:hover {
@@ -249,4 +249,32 @@ body {
     @apply hidden flex flex-row justify-between items-center p-2;
   }
 
+  /* Workouts Page */
+  .workout-title {
+    @apply text-10 text-center text-primary-500;
+  }
+
+  .workout-list {
+    @apply flex flex-col gap-y-2 mx-4 h-full my-4;
+  }
+
+  .workout-add {
+    @apply flex justify-center items-center bg-green-300 w-[20%] h-[12%] mx-auto rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out;
+  }
+
+  .workout-add:hover {
+    @apply transform scale-105 shadow-1;
+  }
+
+  .workout-card {
+    @apply flex items-center h-12 text-7 bg-gray-200 text-primary-500 px-2 rounded-[5px] cursor-pointer transition-all duration-150 ease-in-out;
+  }
+
+  .workout-card:hover {
+    @apply text-primary-700 shadow-1;
+  }
+
+  .workout-info {
+    @apply hidden flex flex-row justify-between items-center p-2;
+  }
 }
