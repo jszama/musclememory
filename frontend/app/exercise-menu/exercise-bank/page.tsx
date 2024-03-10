@@ -6,28 +6,28 @@ interface Exercise {
     description: string;
   }
 
-const exercises: Exercise[] = [
-    {
-        id: 1,
-        name: 'Bench Press',
-        description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
-    },{
-        id: 2,
-        name: 'Ab Crunch',
-        description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
-    },{
-        id: 1,
-        name: 'Bench Press',
-        description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
-    },{
-        id: 1,
-        name: 'Bench Press',
-        description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
-    },{
-        id: 1,
-        name: 'Bench Press',
-        description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
-    }]
+    const exercises: Exercise[] = [
+        {
+            id: 1,
+            name: 'Bench Press',
+            description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
+        },{
+            id: 2,
+            name: 'Ab Crunch',
+            description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
+        },{
+            id: 1,
+            name: 'Bench Press',
+            description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
+        },{
+            id: 1,
+            name: 'Bench Press',
+            description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
+        },{
+            id: 1,
+            name: 'Bench Press',
+            description: 'The bench press is a compound exercise that builds strength and muscle in the chest, shoulders, and triceps'
+        }]
 
 const groupedExercises: Record<string, Exercise[]> = exercises.sort((a, b) => a.name.localeCompare(b.name)).reduce((grouped, exercise) => {
     const letter = exercise.name[0].toUpperCase();
