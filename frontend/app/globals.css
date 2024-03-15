@@ -107,8 +107,8 @@ body {
   }
 
   .text-bold {
-    font-weight: 600;
-  }
+    font-weight: 500
+ }
 
 
 }
@@ -186,6 +186,35 @@ body {
     transform: scale(1.03);
   }
 
+  /* About Us */
+  .about-page {
+    @apply flex flex-col items-center justify-center h-screen w-screen bg-primary-400 text-5 text-white gap-y-2 sm:pt-[25%] md:pt-[10%] overflow-auto;
+  }
+
+  .about-page article {
+    @apply w-[40rem] p-4;
+  }
+
+  .about-page h1 {
+    @apply text-10 text-bold mb-4;
+  }
+
+  .about-page h2 {
+    @apply text-[42px] text-bold mb-4;
+  }
+
+  .about-info {
+    @apply my-4 flex flex-row justify-center w-[85%] bg-primary-300 p-4 rounded-[15px] shadow-1;
+  }
+
+  .about-page section {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .about-page article {
+    @apply w-auto;
+  }
+
   /* Exercise menu */
   .exercise-menu {
     @apply flex justify-around items-center text-center bg-gradient-to-r from-primary-400 to-primary-600 w-[80vw] h-[75vh] rounded-[15px] mt-8 shadow-5 pr-4;
@@ -259,7 +288,7 @@ body {
   }
 
   .workout-add {
-    @apply flex justify-center items-center bg-green-300 w-[20%] h-[12%] mx-auto rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out;
+    @apply flex justify-center items-center bg-green-300 w-[20%] h-[10%] mx-auto rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out;
   }
 
   .workout-add:hover {
@@ -276,5 +305,21 @@ body {
 
   .workout-info {
     @apply hidden flex flex-row justify-between items-center p-2;
+  }
+
+  .no-workouts {
+    @apply flex flex-col justify-start items-center w-[80%] h-[70%] bg-gray-100 shadow-md mt-6 pt-[8%] rounded-t-[5px] rounded-b-[15px] text-center hyphens-auto px-10 shadow-1;
+  }
+  
+  .no-workouts h1 {
+    @apply text-7 text-primary-500 mt-4;
+  }
+
+  .no-workouts button {
+    @apply bg-green-300 text-white w-[40%] h-[10%] rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out mt-6 text-5;
+  }
+
+  .no-workouts button:hover {
+    @apply transform scale-105 shadow-1;
   }
 }
