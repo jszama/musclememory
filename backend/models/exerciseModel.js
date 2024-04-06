@@ -17,12 +17,12 @@ const exerciseSchema = new mongoose.Schema({
     resistance: {
         type: String,
         enum: ['Barbell', 'Bodyweight', 'Cable','Dumbbell', 'Machine', 'Other'],
-        default: 'Beginner'
+        required: true
     },
     angle: {    
         type: String,
         enum: ['Incline', 'Decline', 'Flat', 'Other'],
-        default: 'Horizontal'
+        required: true
     },
 });
 

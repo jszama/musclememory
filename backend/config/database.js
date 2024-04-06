@@ -1,10 +1,7 @@
 const db = require('mongoose');
 
 const start = () => {
-    db.connect(process.env.DB_CON, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    db.connect(process.env.DB_CON)
         .then(() => {
             console.log('Connected to MongoDB');
         })

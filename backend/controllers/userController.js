@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User = require('../models/User');
+const User = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
 
-const validateUserInput = require('../utils/validateUserInput');
-const validateExists = require('../utils/validateExists');
+const validateUserInput = require('./utils/validateUserInput');
+const validateExists = require('./utils/validateExists');
 
 // Register a new user
 
