@@ -5,6 +5,9 @@ import React from "react";
 
 import Template from "./template";
 
+import Header from "./components/Header";
+import BackButton from "./components/BackButton";
+
 export const metadata: Metadata = {
   title: "MuscleMemory",
   description: "Build muscles with memory.",
@@ -20,11 +23,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log('RootLayout rendered');
+
   return (
     <>
       <html lang="en">
         <body className={roboto.className}>
-          <Template>{children}</Template>
+          <Template>
+            <Header/>
+            {children}
+            <BackButton/>
+          </Template>
         </body>
       </html>
     </>

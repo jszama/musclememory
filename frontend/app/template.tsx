@@ -1,12 +1,11 @@
-import Header from './components/Header'
-import BackButton from "./components/BackButton";
+import React from 'react';
 
 export default function Template({ children }: { children: React.ReactNode }) {
+    console.log('ParentComponent rendered');
+    
     return (
-        <div> 
-            <Header />
+        <> 
             {children}
-            <BackButton />
-        </div>
+        </>   
     )
-  }
+}

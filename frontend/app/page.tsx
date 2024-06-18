@@ -5,8 +5,11 @@ export default function Home() {
   return (
     <main className="home-page">
       <div className="btn-container">
+
         <section className='start-btn'>
-          START
+          <Link href='/start'>
+            START
+          </Link>
         </section>
         
         <Link className='app-btn' href='/exercise-menu'>

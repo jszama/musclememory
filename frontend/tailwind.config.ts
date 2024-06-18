@@ -31,6 +31,7 @@ const config: Config = {
         'gray-500': "#9E9E9E",
         'gray-400': "#B8B8B8",
         'gray-300': "#D1D1D1",
+        'gray-250': "#E5E5E5",
         'gray-200': "#EBEBEB",
         'gray-100': "#F5F5F5",
   
@@ -47,7 +48,7 @@ const config: Config = {
         'red-100': "#FFB3B3",
       },  
     },
-    },
+  },
   plugins: [],
 };
 export default config;
