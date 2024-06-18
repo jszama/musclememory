@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';    
 import Link from 'next/link';
 
+import Account from './Account';
+
 export default function Header() {
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -29,7 +31,7 @@ export default function Header() {
                 <Link href='/'><h1>MuscleMemory</h1></Link>
             </div>
             <div className="account-icon">
-                <Link href='account'><Image src="/user.png" alt="account-logo" height={64} width={64}/></Link>
+                <Account/>
             </div>
         </nav>
     );

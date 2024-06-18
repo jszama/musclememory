@@ -1,33 +1,30 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function BackButton() {
-    const [isHomePage, setIsHomePage] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        setIsHomePage(window.location.pathname === '/');
-        setIsLoading(false);
-    }, []);
-
-    if (isLoading) {
-        return null;
-    }
+    const router = useRouter();
+    const pathname = usePathname();
+    const isHomePage = (pathname === '/');
 
     return (
-        <>
-            {!isHomePage && !isLoading && (
+    <>
+        {!isHomePage && 
+            <div className='back-button'>
                 <Image
                     className='back-btn'
                     src="/back.png"
                     alt="back-button"
                     width={64}
                     height={64}
-                    onClick={() => window.history.back()}
+                    onClick={() => {
+                        router.back();
+                    }}
                 />
-            )}
-        </>
+            </div>
+        }
+    </>
     );
 }
