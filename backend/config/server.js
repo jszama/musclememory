@@ -4,15 +4,18 @@ const cors = require('cors');
 
 const exerciseRoutes = require('../routes/exerciseRoutes');
 const userRoutes = require('../routes/userRoutes');
+const workoutRoutes = require('../routes/workoutRoutes');
+const completedWorkoutsRoutes = require('../routes/completedWorkouts');
 
 const app = express();
 
 app.use(express.json());
-
 app.use(cors());
 
-app.use('/api/users', userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/exercises', exerciseRoutes);
+app.use('/api/workouts', workoutRoutes);
+app.use('/api/completed_workouts', completedWorkoutsRoutes);
 
 app.use((req, res) => {
     res.status(404).json({ message: `Route not found: ${req.originalUrl}` });

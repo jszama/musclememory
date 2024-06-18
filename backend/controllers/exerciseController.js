@@ -16,22 +16,7 @@ const getExercise = async (req, res) => {
     }
 };
 
-const createExercise = async (req, res) => {
-    const { name, description, muscleGroup, resistance, angle } = req.body;
-
-    const exercise = await Exercise.create({
-        name,
-        description,
-        muscleGroup,
-        resistance,
-        angle
-    });
-
-    res.status(201).json(exercise);
-};
-
 module.exports = {
     getExercises,
-    getExercise,
-    createExercise
+    getExercise
 };
