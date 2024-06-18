@@ -1,4 +1,10 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function About() {
+    const router = useRouter();
+
     return (
         <main className="about-page">
             <h1>
@@ -27,13 +33,17 @@ export default function About() {
                 </section>
             </div>
             <section>  
-                    <h2>
-                        Get Started
-                    </h2>
-                    <article>
-                        Ready to get started? Create an account and start tracking your workouts today!
-                    </article>
-                </section>
+                <h2>
+                    Get Started
+                </h2>
+                <article  className='pt-[0px]'>
+                    Ready to get started? Create an account and start tracking your workouts today!
+                </article>
+            
+                <button className="create-workout h-auto mb-8 text-6" onClick={() => router.push('/account')}>
+                    Sign Up
+                </button>
+            </section>
         </main>
     );
 }
