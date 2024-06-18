@@ -2,38 +2,31 @@ export default function Contact() {
     return (
         <main className="contact-page">
             <h1>
-                About MuscleMemory
+                Contact Us
             </h1>
             <article>
-                MuscleMemory is a fitness app that helps you track your workouts and stay on top of your fitness goals.
+                Have a question or need help? Contact us and we'll get back to you as soon as possible.
             </article>
             <div className="contact-info">
                 <section>
                     <h2>
-                        Our Mission
+                        Email
                     </h2>
                     <article>
-                        Our mission is to help people achieve their fitness goals by providing them with the tools they need to succeed. We believe that everyone should have access to the resources they need to live a healthy lifestyle.
+                        Send us an email at
                     </article>
                 </section>
 
-                <section>
+                <section>  
                     <h2>
-                        Our Features
+                        FAQ
                     </h2>
                     <article>
-                        Our app has a variety of features to help you stay on top of your fitness goals. You can create custom workout plans, track your progress, and connect with other users to stay motivated. We also provide a library of exercises and workouts to help you get started.
+                        Have a question? See our FAQ below to see if we've already answered it.
                     </article>
                 </section>
             </div>
-            <section>  
-                    <h2>
-                        Get Started
-                    </h2>
-                    <article>
-                        Ready to get started? Create an account and start tracking your workouts today!
-                    </article>
-                </section>
+            
         </main>
     );
 }
