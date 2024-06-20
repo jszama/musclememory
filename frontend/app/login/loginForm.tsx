@@ -68,7 +68,10 @@ export default function LoginForm() {
             } required />
 
             <p className='error'>{error}</p>
-            <input type='checkbox' id='remember' onChange={ (e) => setRemember(e.target.checked)}/>
+            <div className='flex flex-row m-0 p-0'>
+                <label htmlFor='remember'>Remember me</label>
+                <input className='m-2' type='checkbox' id='remember' onChange={(e) => setRemember(e.target.checked)} />
+            </div>
             <button type="submit">CONTINUE</button>                
         </form>
     )
