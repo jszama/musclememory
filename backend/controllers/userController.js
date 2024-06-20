@@ -18,8 +18,12 @@ const registerUser = asyncHandler(async (req, res) => {
         password: hashedPassword
     });
 
-    const token = await generateToken(user._id);
-
+    const token = generateToken(user._id);
+    res.cookie('token', token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    });
+    
     res.status(201).json({
         user: {
             _id: user._id,
@@ -34,12 +38,19 @@ const registerUser = asyncHandler(async (req, res) => {
 // Login a user
 
 const loginUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, remember } = req.body;
 
     const user = await User.findOne({ email });
 
     if (validLogin(user, password)) {
         const token = generateToken(user._id);
+
+        if (remember === true) {
+            res.cookie('token', token, {
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24 * 7
+            });
+        }
 
         res.status(200).json({
             user: {

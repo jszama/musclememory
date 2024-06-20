@@ -8,14 +8,16 @@ import checkLogin from '../components/functions/checkLogin'
 export default function LoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [remember, setRemember] = useState(false)
     const [error, setError] = useState('')
     const router = useRouter()
 
     useEffect(() => {
         if (checkLogin()) {
             router.replace('/account')
+            return;
         }
-    }, [router])
+    }, [])
 
     const validateInput = (email: string, password: string) => {
         if (!email || !password) {
@@ -29,7 +31,7 @@ export default function LoginForm() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, remember })
         });
 
         const data = await response.json();
@@ -40,7 +42,7 @@ export default function LoginForm() {
         document.cookie = `token=${data.user.token}`;
     }
 
-    const login = async (email: string, password: string) => {
+    const login = async (email: string, password: string, remember: boolean) => {
         validateInput(email, password);
 
         await loginUser();
@@ -50,8 +52,7 @@ export default function LoginForm() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            await login(email, password)
-            alert('Logged in successfully')
+            await login(email, password, remember)
         } catch (err) {
             setError((err as Error).message)
         }
@@ -67,6 +68,7 @@ export default function LoginForm() {
             } required />
 
             <p className='error'>{error}</p>
+            <input type='checkbox' id='remember' onChange={ (e) => setRemember(e.target.checked)}/>
             <button type="submit">CONTINUE</button>                
         </form>
     )
