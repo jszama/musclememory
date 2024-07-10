@@ -19,9 +19,9 @@ export default function Home() {
         <section className='app-btn'>
           <Image src="/statistics.png" alt="Statistics" width={72} height={72}/>
         </section>
-        <section className='app-btn'>
+        <Link className='app-btn' href='/history'>
           <Image src="/history.png" alt="History" width={72} height={72}/>
-        </section>
+        </Link>
         <section className='app-btn'>
           <Image src="/friends.png" alt="Friends" width={96} height={96}/>
         </section>
