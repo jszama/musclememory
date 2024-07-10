@@ -196,7 +196,7 @@ body {
   }
 
   .login-box {
-    @apply flex flex-col items-center  w-auto p-4 border-t-primary-500 border-t-[7.5px] rounded-t-[5px] rounded-b-[15px] shadow-3-white bg-white h-[432px];
+    @apply flex flex-col items-center  w-auto p-4 border-t-primary-500 border-t-[7.5px] rounded-t-[5px] rounded-b-[15px] shadow-3-white bg-white h-[440px];
   }
 
   .login-box p {
@@ -220,11 +220,11 @@ body {
   }
 
   .login-box form {
-    @apply flex flex-col items-center justify-center w-full p-4 gap-4;
+    @apply flex flex-col items-center justify-center w-full p-4;
   }
 
-  .login-box input {
-    @apply w-[364px] h-[40px] bg-transparent text-4 text-primary-700 rounded-t-[5px] bg-gray-100 border-b-primary-300 border-b-[2.5px] p-2 my-2;
+  .login-box input[type="text"], .login-box input[type="password"], .login-box input[type="email"]{
+    @apply w-[364px] h-[40px] bg-transparent text-4 text-primary-700 rounded-t-[5px] bg-gray-100 border-b-primary-300 border-b-[2.5px] p-2 my-4;
   }
 
   .login-box input:focus {
@@ -232,7 +232,7 @@ body {
   }
 
   .login-box button {
-    @apply w-[364px] h-[40px] bg-gradient-to-r from-primary-300 to-primary-500 text-white rounded-[10px] shadow-2 cursor-pointer my-2 tracking-[0.3em] text-3 transition-all duration-150 ease-in-out;
+    @apply w-[364px] h-[40px] bg-gradient-to-r from-primary-300 to-primary-500 text-white rounded-[10px] shadow-2 cursor-pointer mt-8 tracking-[0.3em] text-3 transition-all duration-150 ease-in-out;
   }
 
   .login-box button:hover {
@@ -322,7 +322,7 @@ body {
   }
 
   .exercise-bank {
-    @apply w-[80%] min-h-[70%] bg-gray-100 shadow-1 mt-6 rounded-t-[5px] rounded-b-[15px];
+    @apply w-[80%] h-[70%] bg-gray-100 shadow-1 mt-6 rounded-t-[5px] rounded-b-[15px];
   }
 
   .search-filters {
@@ -553,23 +553,19 @@ body {
 
   /* Workout Review */
   .completed-workout{
-    @apply flex flex-col justify-normal items-center h-[70%] w-[50%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] shadow-3;
+    @apply flex flex-col justify-normal items-center h-[90%] w-[50%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] shadow-3 p-2;
   }
 
   .completed-workout h1 {
     @apply text-8 text-bold;
   }
 
-  .completed-workout h2 {
-    @apply text-7 text-center justify-center;
+  .completed-workout-list {
+    @apply flex flex-col w-auto max-h-[70%] p-4 bg-primary-500 rounded-[5px] shadow-2 overflow-auto gap-y-2;
   }
 
   .completed-workout-info {
-    @apply flex flex-col w-full h-full mt-4
-  }
-
-  .completed-workout-list {
-    @apply flex flex-col gap-2 w-full h-full overflow-auto bg-primary-500 p-2 rounded-[5px];
+    @apply bg-primary-300 flex flex-col justify-between p-4 rounded-[5px] shadow-2 w-[90%] max-h-[80%];
   }
 
   /* Custom Scrollbar */
@@ -578,5 +574,4 @@ body {
     background-color: lightgray;
     border-radius: 8px;
   }
-
 }
