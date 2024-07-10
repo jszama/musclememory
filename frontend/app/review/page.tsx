@@ -22,14 +22,11 @@ export default function ReviewScreen() {
     }
     
     let totalVolume = 0;
-    let musclesWorked: string[] = [];
+    let musclesWorked: Set<string> = new Set();
 
     for (let i = 0; i < completedWorkout.exercises.length; i++) {
         let currMuscles = completedWorkout.exercises[i].exercise.muscleGroup;
-
-        if (!musclesWorked.includes(currMuscles)) {
-            musclesWorked.push(currMuscles)
-        }
+        musclesWorked.add(currMuscles)
         
         for ( let j = 0; j < completedWorkout.exercises[i].sets.length; j++) {
             totalVolume += completedWorkout.exercises[i].reps[j] * completedWorkout.exercises[i].weight[j];
@@ -56,13 +53,13 @@ export default function ReviewScreen() {
                         </section>
                         <section>
                             <h2 className="text-bold">Primary Muscles Worked</h2>
-                            <ul className="completed-workout-list">
-                                { musclesWorked.map((muscleGroup, index) => (
+                            <ol className="completed-workout-list">
+                                { Array.from(musclesWorked).map((muscleGroup: string, index: number) => (
                                     <li key={index}>
                                         <h3>{ muscleGroup }</h3>
                                     </li>
                                 ))}
-                            </ul>
+                            </ol>
                         </section>
                     </section>
                 </div>
