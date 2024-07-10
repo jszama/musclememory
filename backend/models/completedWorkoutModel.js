@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const completedWorkoutSchema = new mongoose.Schema({
-    _id: {
+    user_id: {
         type: String,
         required: true
     },
@@ -12,6 +12,10 @@ const completedWorkoutSchema = new mongoose.Schema({
     exercises: {
         type: Array,
         required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now()
     }
 });
 
