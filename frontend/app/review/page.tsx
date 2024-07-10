@@ -10,9 +10,27 @@ export default function ReviewScreen() {
 
     const completedWorkout = JSON.parse(search.get('workout') || '') as CompletedWorkout;
 
+    if (completedWorkout === null) {
+        return (
+            <main className="start-home">
+                <section className="completed-workout">
+                    <h1>Workout Not Found</h1>
+                    <Link href='/' className="start-btn-small mb-4">Continue</Link>
+                </section>
+            </main>
+        );
+    }
+    
     let totalVolume = 0;
+    let musclesWorked: string[] = [];
 
     for (let i = 0; i < completedWorkout.exercises.length; i++) {
+        let currMuscles = completedWorkout.exercises[i].exercise.muscleGroup;
+
+        if (!musclesWorked.includes(currMuscles)) {
+            musclesWorked.push(currMuscles)
+        }
+        
         for ( let j = 0; j < completedWorkout.exercises[i].sets.length; j++) {
             totalVolume += completedWorkout.exercises[i].reps[j] * completedWorkout.exercises[i].weight[j];
         }
@@ -39,9 +57,9 @@ export default function ReviewScreen() {
                         <section>
                             <h2 className="text-bold">Primary Muscles Worked</h2>
                             <ul className="completed-workout-list">
-                                { completedWorkout.exercises.map((exercise, index) => (
+                                { musclesWorked.map((muscleGroup, index) => (
                                     <li key={index}>
-                                        <h3>{ exercise.exercise.muscleGroup }</h3>
+                                        <h3>{ muscleGroup }</h3>
                                     </li>
                                 ))}
                             </ul>
