@@ -19,7 +19,7 @@ export default function LoggedIn() {
     return (
         <>
             {start ?
-                <StartWorkout pickedWorkout={pickedWorkout} />
+                <StartWorkout pickedWorkout={pickedWorkout} loggedIn={true} />
                 :
                 <WorkoutPicker pickedWorkout={pickedWorkout} setPickedWorkout={setPickedWorkout} />}
         </>

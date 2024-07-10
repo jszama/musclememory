@@ -20,7 +20,7 @@ export default function Guest() {
     return (
     <>
         { start ?
-            <StartWorkout pickedWorkout = { pickedWorkout } />
+            <StartWorkout pickedWorkout = { pickedWorkout } loggedIn={false} />
         :(
             <div className="guest-screen">
                 <p>
