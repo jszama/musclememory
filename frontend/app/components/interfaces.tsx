@@ -5,7 +5,7 @@ interface Workout {
 }
 
 interface Exercise {
-    id: string;
+    _id: string;
     name: string;
     muscleGroup: string;
     resistance: string;
@@ -28,8 +28,10 @@ interface ActiveExercise {
 
 interface CompletedWorkout {
     _id: string;
+    user_id: string;
     name: string;
     exercises: ActiveExercise[];
+    date: string;
 }
 
 export type { Workout, Exercise, User, ActiveExercise, CompletedWorkout };
