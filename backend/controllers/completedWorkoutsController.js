@@ -1,11 +1,11 @@
 const CompletedWorkout = require('../models/completedWorkoutModel');
 
 const addWorkout = async (req, res) => {
-    const { _id, name, exercises } = req.body;
+    const { user_id, name, exercises } = req.body;
 
     const workout = await CompletedWorkout 
     .create({
-        _id,
+        user_id,
         name,
         exercises
     });
@@ -14,7 +14,7 @@ const addWorkout = async (req, res) => {
 }
 
 const getWorkouts = async (req, res) => {
-    const workouts = await CompletedWorkout.find({ user: req.params.id });
+    const workouts = await CompletedWorkout.find({ user_id: req.params.id });
 
     return res.json(workouts);
 }
