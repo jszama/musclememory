@@ -15,8 +15,6 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
 
     const user_id = document?.cookie.split(';')[0].split('=')[1];
 
-    const [completeWorkout, setCompleteWorkout] = useState({} as CompletedWorkout);
-
     const [addExercise, setAddExercise] = useState(false);
     const [showButton, setShowButton] = useState(true);
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
