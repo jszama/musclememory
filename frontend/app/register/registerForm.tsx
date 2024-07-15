@@ -65,7 +65,7 @@ export default function RegisterPage() {
         }
 
         const data = await response.json();
-        document.cookie = `user=${data.user._id}`;
+        document.cookie = `user=${data.user._id                 }`;
         document.cookie = `token=${data.user.token}`;
     }
 
