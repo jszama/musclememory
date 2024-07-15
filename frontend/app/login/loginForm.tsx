@@ -40,9 +40,14 @@ export default function LoginForm() {
         }
         document.cookie = `user=${data.user._id}`;
         document.cookie = `token=${data.user.token}`;
+
+        if (remember) {
+            localStorage.setItem('user', data.user._id);
+            localStorage.setItem('token', data.user.token);
+        }
     }
 
-    const login = async (email: string, password: string, remember: boolean) => {
+    const login = async (email: string, password: string) => {
         validateInput(email, password);
 
         await loginUser();
@@ -52,7 +57,7 @@ export default function LoginForm() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            await login(email, password, remember)
+            await login(email, password)
         } catch (err) {
             setError((err as Error).message)
         }
