@@ -33,7 +33,7 @@ export default function LoggedIn() {
             <ul className="completed-workout-list items-center h-[80%] max-h-[90%] w-[60%]">
                 {history.map((workout: CompletedWorkout) => {
                     return (
-                        <li key={workout._id} onClick={() => handleDescription(workout._id)} className={`completed-workout-info ${selectedWorkout === workout._id ? 'scale-[1.02]' : ''}`}>
+                        <li key={workout._id} onClick={() => handleDescription(workout._id)} className={`completed-workout-info w-full ${selectedWorkout === workout._id ? 'scale-[1.02]' : ''}`}>
                             <span className="flex flex-row justify-between border-b-[3px] border-gray-100">
                                 <h2>{workout.name}</h2>
                                 <p>{new Date(workout.date).toLocaleDateString()}</p>
