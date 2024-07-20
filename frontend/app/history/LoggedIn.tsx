@@ -27,21 +27,21 @@ export default function LoggedIn() {
     }
 
     return (
-        <div className="completed-workout w-[45%]">
+        <div className="workout-history">
             <h1>History</h1>
+            <ul className="workout-history-list">
             { history.length === 0 && <p>No workouts completed yet</p> }
-            <ul className="completed-workout-list items-center h-[80%] max-h-[90%] w-[60%]">
                 {history.map((workout: CompletedWorkout) => {
                     return (
-                        <li key={workout._id} onClick={() => handleDescription(workout._id)} className={`completed-workout-info w-full ${selectedWorkout === workout._id ? 'scale-[1.02]' : ''}`}>
-                            <span className="flex flex-row justify-between border-b-[3px] border-gray-100">
+                        <li key={workout._id} onClick={() => handleDescription(workout._id)} className={`workout-history-info ${selectedWorkout === workout._id ? 'scale-[1.02]' : ''}`}>
+                            <span className="workout-history-card">
                                 <h2>{workout.name}</h2>
                                 <p>{new Date(workout.date).toLocaleDateString()}</p>
                             </span>
-                            <ul className={`${selectedWorkout === workout._id ? 'flex flex-col overflow-auto text-2' : 'hidden'}`} >
+                            <ul className={`${selectedWorkout === workout._id ? 'workout-history-details' : 'hidden'}`} >
                                 {workout.exercises.map(exercise => {
                                     return (
-                                        <li key={exercise.exercise._id} className="border-b-[3px] rounded-[3px] border-gray-250 py-1">
+                                        <li key={exercise.exercise._id} className="workout-history-item">
                                             <h3>{exercise.exercise.name}</h3>
 
                                             {exercise.sets.map((set, index) => {
