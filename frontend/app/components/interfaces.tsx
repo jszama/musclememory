@@ -17,6 +17,8 @@ interface User {
     _id: string;
     name: string;
     email: string;
+    bio: string;
+    profilePicture: string;
 }
 
 interface ActiveExercise {

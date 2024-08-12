@@ -7,6 +7,7 @@ export default function About() {
 
     return (
         <main className="about-page">
+            <div className='about-content'>
             <h1>
                 About MuscleMemory
             </h1>
@@ -36,14 +37,15 @@ export default function About() {
                 <h2>
                     Get Started
                 </h2>
-                <article  className='pt-[0px]'>
+                <article>
                     Ready to get started? Create an account and start tracking your workouts today!
                 </article>
             
-                <button className="create-workout h-auto mb-8 text-6" onClick={() => router.push('/account')}>
-                    Sign Up
+                <button className="about-sign-up-btn" onClick={() => router.push('/account')}>
+                    SIGN UP
                 </button>
             </section>
+            </div>
         </main>
     );
 }

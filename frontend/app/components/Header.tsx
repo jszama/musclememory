@@ -21,9 +21,8 @@ export default function Header() {
                 </div>
                 {showDropdown && (
                     <ul className="dropdown-menu">
-                        <li className='dropdown-menu-item'><Link href='/get-started'>Get Started</Link></li>
-                        <li className='dropdown-menu-item'><Link href='/contact-us'>Contact Us</Link></li>
                         <li className='dropdown-menu-item'><Link href='/about-us'>About Us</Link></li>
+                        <li className='dropdown-menu-item'><Link href='/contact-us'>Contact Us</Link></li>
                     </ul>
                 )}
             </div>

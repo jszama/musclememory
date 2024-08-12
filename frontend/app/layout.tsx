@@ -3,10 +3,9 @@ import { Roboto } from 'next/font/google'
 import "./globals.css";
 import React from "react";
 
-import Template from "./template";
-
 import Header from "./components/Header";
 import BackButton from "./components/BackButton";
+
 
 export const metadata: Metadata = {
   title: "MuscleMemory",
@@ -23,7 +22,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log('RootLayout rendered');
+
 
   return (
     <>
@@ -32,11 +31,9 @@ export default function RootLayout({
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </head>
         <body className={roboto.className}>
-          <Template>
-            <Header/>
-            {children}
-            <BackButton/>
-          </Template>
+          <Header/>
+          {children}
+          <BackButton/>
         </body>
       </html>
     </>

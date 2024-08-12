@@ -28,7 +28,6 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 exercisesPicked.splice(0, exercisesPicked.length);
                 router.push('/exercise-menu/workouts');
             });
@@ -37,11 +36,11 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
 
     return (
         <>
-        <div className="exercise-bank">
+        <div className="create-workout-container">
             <input className="workout-title-input" placeholder="Workout Name" />
-            <div className="exercise-list items-center overflow-auto max-h-[70%] h-auto">
+            <div className="create-workout-exercise-list ">
                 {exercisesPicked.map((exercise, index) => (
-                    <div className='exercise-card flex flex-row justify-between mx-2 w-[60%] text-primary-500' key={index}>
+                    <div className='create-workout-exercise-card' key={index}>
                         <h2>{exercise.name}</h2>
                         <button className="remove-exercise text-black" onClick={() => {
                             exercisesPicked.splice(index, 1);
@@ -54,8 +53,8 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
                         </button>
                     </div>
                 ))}   
+                <button className="create-workout-add-exercise" onClick={() => setPickMode(true)}>+</button>
             </div>
-            <button className="add-exercise-large" onClick={() => setPickMode(true)}>+</button>
         </div>
             <button className="create-workout" onClick={() => {
                 CreateWorkout();

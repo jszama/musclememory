@@ -127,6 +127,12 @@ body {
     @apply text-center mx-auto text-9 tracking-wide text-bold cursor-pointer;
   }
 
+  @media (max-width: 640px) {
+    .header-title {
+      @apply text-7;
+    }
+  }    
+
   .header-title:hover {
     transform: scale(1.05);
   }
@@ -135,12 +141,30 @@ body {
     @apply p-4 text-6;
   }
 
+  @media (max-width: 640px) {
+    .hamburger-menu {
+      @apply p-2;
+    }
+  }
+
   .hamburger-icon {
     @apply h-[36px] w-[36px] cursor-pointer;
+  }
+  
+  @media (max-width: 640px) {
+    .hamburger-icon {
+      @apply h-[24px] w-[24px];
+    }
   }
 
   .account-icon {
     @apply mr-1 h-[48px] w-[48px] cursor-pointer;
+  }
+
+  @media (max-width: 640px) {
+    .account-icon {
+      @apply mr-2 h-[36px] w-[36px];
+    }
   }
   
   .hamburger-icon:hover, .account-icon:hover {
@@ -151,8 +175,20 @@ body {
     @apply absolute top-[7.5vh] text-5 w-[12vw] bg-gray-100 rounded-[5px] text-primary-800 py-4 shadow-4;
   }
 
+  @media (max-width: 640px) {
+    .dropdown-menu {
+      @apply text-4 w-[40vw] py-2;
+    }
+  }
+
   .dropdown-menu-item {
     @apply px-4 py-1 text-left cursor-pointer bg-gray-200 border-t-[0.5px] border-b-[0.5px] border-gray-100;
+  }
+
+  @media (max-width: 640px) {
+    .dropdown-menu-item {
+      @apply px-2 border-primary-400;
+    }
   }
 
   .dropdown-menu-item:hover {
@@ -196,11 +232,19 @@ body {
   }
 
   .login-box {
-    @apply flex flex-col items-center  w-auto p-4 border-t-primary-500 border-t-[7.5px] rounded-t-[5px] rounded-b-[15px] shadow-3-white bg-white h-[440px];
+    @apply flex flex-col items-center w-[30%] p-4 border-t-primary-500 border-t-[7.5px] rounded-t-[5px] rounded-b-[15px] shadow-3-white bg-white h-[440px] transition-all duration-300;
+  }
+
+  .login-content {
+    @apply w-full
   }
 
   .login-box p {
     @apply bottom-0;
+  }
+
+  .remember-me {
+    @apply flex flex-row justify-start w-[90%] text-4 pl-2;
   }
 
   .login-box .error {
@@ -215,16 +259,20 @@ body {
     @apply text-primary-500 text-bold;
   }
 
+  .redirect-text {
+    @apply w-[90%] pl-2;
+  }
+
   .login-box h1 {
-    @apply text-left w-full text-9 mb-4 text-primary-500 pl-5;
+    @apply text-left w-full text-9 text-primary-500 pl-5;
   }
 
   .login-box form {
-    @apply flex flex-col items-center justify-center w-full p-4;
+    @apply flex flex-col items-center justify-center w-full;
   }
 
   .login-box input[type="text"], .login-box input[type="password"], .login-box input[type="email"]{
-    @apply w-[364px] h-[40px] bg-transparent text-4 text-primary-700 rounded-t-[5px] bg-gray-100 border-b-primary-300 border-b-[2.5px] p-2 my-4;
+    @apply w-[90%] h-[40px] bg-transparent text-4 text-primary-700 rounded-t-[5px] bg-gray-100 border-b-primary-300 border-b-[2.5px] p-2 my-4;
   }
 
   .login-box input:focus {
@@ -232,53 +280,186 @@ body {
   }
 
   .login-box button {
-    @apply w-[364px] h-[40px] bg-gradient-to-r from-primary-300 to-primary-500 text-white rounded-[10px] shadow-2 cursor-pointer mt-8 tracking-[0.3em] text-3 transition-all duration-150 ease-in-out;
+    @apply w-[90%] h-[40px] bg-gradient-to-r from-primary-300 to-primary-500 text-white rounded-[10px] shadow-2 cursor-pointer mt-5 mb-3 tracking-[0.3em] text-3 transition-all duration-150 ease-in-out;
   }
 
   .login-box button:hover {
     @apply transform scale-105 shadow-1;
   }
 
+  .register-box {
+    @apply login-box h-auto
+  }
+
+  @media (max-width: 920px) {
+    .login-box {
+      @apply w-[50%]
+    }
+  }
+
+  @media (max-width: 640px) {
+    .login-box {
+      @apply w-[90%] px-2
+    }
+
+    .login-title {
+      @apply ml-2
+    }
+
+    .register-box {
+      @apply h-[70%]
+    }
+
+    .register-form input[type="text"], .login-box input[type="password"], .login-box input[type="email"] {
+      @apply my-2
+    }
+  }
+
   /* Account */
   .account-page {
-    @apply flex flex-col items-center justify-center h-screen w-screen bg-primary-400 text-5 text-white gap-y-2 sm:pt-[25%] md:pt-[10%] overflow-auto;
+    @apply flex flex-col items-center justify-center h-screen w-screen bg-primary-400 text-5 text-white gap-y-2 overflow-auto min-w-[320px];
   }
 
   .account-info {
-    @apply my-4 flex flex-col justify-center w-auto bg-primary-300 p-4 rounded-[15px] shadow-1 ;
+    @apply flex flex-col justify-between h-[60%] w-[60%] bg-primary-300 p-4 rounded-[15px] shadow-1 gap-y-2;
   }
 
-  .account-info h1 {
-    @apply text-10 text-bold mb-4;
+  .account-details {
+    @apply justify-around h-auto w-[70%];
   }
 
-  .account-info p {
-    @apply text-6;
+  .account-top-section {
+    @apply h-[60%] w-full flex flex-row justify-between
   }
 
-  .account-info button {
-    @apply w-[40%] h-[15%] bg-primary-500 text-white rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out mt-6 text-5;
+  .account-bottom-section {
+    @apply h-[40%] justify-between flex flex-col items-center
+  }
+
+  .account-info-title {
+    @apply text-8 w-auto;
+  }
+
+  .account-info-title span {
+    @apply text-bold text-8
+  }
+
+  .account-info-email {
+    @apply text-4;
+  }
+
+  .account-info-btn-box {
+    @apply flex flex-row justify-between gap-x-8;
+  }
+
+  .account-info-btn-box Link{
+    @apply w-full;
+  }
+
+  .account-info-logout-btn {
+    @apply w-auto h-auto bg-red-400 text-white rounded-[15px] tracking-widest shadow-2 cursor-pointer transition-all duration-150 ease-in-out px-2 py-1 text-5 text-bold;
+  }
+
+  .account-profile-picture-box {
+    @apply h-[25vh] w-[25vh] bg-gray-50 rounded-full shadow-2 overflow-hidden relative;
+  }
+
+  .account-profile-picture {
+    @apply h-full w-full object-cover z-0 relative;
+  }
+
+  .upload-overlay {
+    @apply h-full w-full bg-transparent items-center justify-center text-5 text-white z-10 absolute top-0 bottom-0 transition-all duration-150 ease-in-out;
+  }
+
+  .upload-overlay:hover {
+    @apply bg-black/50;
+  }
+
+  .upload-overlay input {
+    @apply text-[0px] w-full h-full absolute top-0 bottom-0 cursor-pointer;
+  }
+  .account-bio-box {
+    @apply h-[4rem] bg-gray-50 w-[80%] block shadow-2 rounded-[15px] p-1 text-primary-500 overflow-auto;
+  }
+
+  .account-bio-box textarea:focus {
+    @apply outline-none;
+  } 
+
+  .account-bio {
+    @apply min-h-full max-h-full min-w-full text-3 text-bold;
+    word-wrap: break-word;
+  }
+  .account-edit-bio-btn {
+    @apply w-auto h-auto bg-primary-500 text-white rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-2 px-2 py-1 tracking-widest my-2;
+  }
+  
+  .account-error-text {
+    @apply text-3
+  }
+
+  .account-friend-icon {
+    @apply h-[48px] w-[48px] cursor-pointer;
+  }
+
+  .account-stats-icon {
+    @apply h-[48px] w-[48px] cursor-pointer;
+  }
+
+  @media (max-width: 640px) {
+    .account-info {
+      @apply w-[90%] text-3 h-[50%];
+    }
+    
+    .account-info-title {
+      @apply text-4
+    }
+
+    .account-info-title span {
+      @apply text-6
+    }
+
+    .account-info-email {
+      @apply text-2
+    }
+
+    .account-profile-picture-box {
+      @apply w-[25vw] h-[25vw]
+    }
+    
+    .account-bio-box {
+      @apply w-[95%];
+    }
+
+    .account-bio {
+      @apply text-1
+    }
+
+    .account-info-btn-box {
+      @apply scale-75
+    }
   }
 
   /* About Us */
   .about-page {
-    @apply flex flex-col items-center justify-center h-screen w-screen bg-primary-400 text-5 text-white gap-y-2 sm:pt-[25%] md:pt-[10%] overflow-auto;
+    @apply flex flex-col text-center items-center justify-center h-full w-full bg-primary-400 text-5 text-white gap-y-2 sm:pt-[25%] md:pt-[10%] overflow-auto;
   }
 
   .about-page article {
-    @apply w-[40rem] p-4;
+    @apply w-[40rem] p-3;
   }
 
   .about-page h1 {
-    @apply text-10 text-bold mb-4;
+    @apply text-10 text-bold;
   }
 
   .about-page h2 {
-    @apply text-[42px] text-bold mb-4;
+    @apply text-[42px] text-bold;
   }
 
   .about-info {
-    @apply my-4 flex flex-row justify-center w-[85%] bg-primary-300 p-4 rounded-[15px] shadow-1;
+    @apply my-4 flex flex-row items-center text-center justify-center w-[85%] bg-primary-300 p-4 rounded-[15px] shadow-1;
   }
 
   .about-page section {
@@ -289,13 +470,83 @@ body {
     @apply w-auto;
   }
 
+  .about-content {
+    @apply flex flex-col h-[100%] items-center
+  }
+
+  .about-sign-up-btn {
+    @apply create-workout h-auto mb-8 w-auto text-6;
+  }
+
+  @media (max-width: 640px) {
+    .about-page {
+      @apply text-3;
+    }
+
+    .about-content {
+      @apply pt-[20%]
+    }
+
+    .about-page article {
+      @apply w-[90%] p-2;
+    }
+
+    .about-page h1 {
+      @apply text-6;
+    }
+
+    .about-page h2 {
+      @apply text-5;
+    }
+
+    .about-info {
+      @apply flex-col my-2 w-[90%];
+    }
+    
+    .about-sign-up-btn {
+      @apply text-5;
+    }
+  }
+
   /* Contact Us */
   .contact-page {
-    @apply flex flex-col items-center justify-center h-screen w-screen bg-primary-400 text-5 text-white gap-y-2 sm:pt-[25%] md:pt-[10%] overflow-auto;
+    @apply flex flex-col items-center justify-center h-full w-full bg-primary-400 text-5 text-white gap-y-2 sm:pt-[25%] md:pt-[10%] overflow-auto;
+  }
+  
+  .contact-page-title {
+    @apply text-9 text-bold 
   }
 
   .contact-info {
-    @apply my-4 flex flex-row justify-center w-[85%] bg-primary-300 p-4 rounded-[15px] shadow-1;
+    @apply my-4 flex flex-col items-center justify-center w-[75%] bg-primary-300 p-4 rounded-[15px] shadow-1 gap-y-4;
+  }
+
+  .contact-faq-title {
+    @apply text-8 text-bold;
+  }
+
+  .contact-info section {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .contact-faq-box {
+    @apply flex flex-col items-center justify-center w-[85%] bg-primary-400 p-4 shadow-2 border-[1.5px] rounded-sm border-primary-900 gap-y-4;
+  }
+
+  .contact-faq-box h2 {
+    @apply text-bold
+  }
+
+  .contact-faq-box article {
+    @apply text-3 text-slate-200
+  }
+
+  .contact-redirect {
+    @apply text-white bg-green-300 px-2 py-1 transition-all duration-150 ease-in-out cursor-pointer w-auto h-auto text-bold rounded-[15px] text-3;
+  }
+
+  .contact-extra {
+    @apply text-3 text-bold;
   }
 
   /* Exercise menu */
@@ -312,25 +563,40 @@ body {
     text-shadow: 0px 0px 40px white;
   }
 
+  @media (max-width: 640px) {
+    .exercise-menu {
+      @apply flex flex-col bg-gradient-to-b;
+    }
+
+    .exercise-menu h1 {
+      @apply text-8; 
+    }
+    
+    .exercise-menu h1:hover {
+      @apply scale-[1.01];
+      text-shadow: 0px 0px 20px white;
+    }
+  }
+
   /* Exercise Bank */
   .exercise-container {
-    @apply flex flex-col justify-center mt-8 items-center w-[768px] h-[584px] bg-gray-100 border-t-primary-500 border-t-[10px] rounded-t-[5px] rounded-b-[15px] shadow-3
+    @apply flex flex-col justify-center mt-8 items-center w-[80%] h-[75%] bg-gray-100 border-t-primary-500 border-t-[10px] rounded-t-[5px] rounded-b-[15px] shadow-3
   }
 
   .exercise-search {
-    @apply flex w-[80%] h-[8%] bg-gray-200 text-start items-center p-2 shadow-1 text-6;
+    @apply flex w-[80%] h-auto bg-gray-200 text-start items-center p-1 shadow-1 text-5;
   }
 
   .exercise-bank {
-    @apply w-[80%] h-[70%] bg-gray-100 shadow-1 mt-6 rounded-t-[5px] rounded-b-[15px];
+    @apply w-[80%] max-h-[80%] bg-gray-100 shadow-1 mt-6 rounded-t-[5px] rounded-b-[15px];
   }
 
   .search-filters {
-    @apply flex flex-row justify-between px-4 w-full h-[9%] bg-gray-200 text-start items-center p-2 text-6 border-b-2 border-b-gray-300;
+    @apply flex flex-row justify-between px-4 w-full h-[9%] bg-gray-200 text-start items-center p-4 text-6 border-b-2 border-b-gray-300;
   }
 
   .search-filters select {
-    @apply w-auto bg-gray-300/50 text-4 text-center rounded-[10px] text-primary-500 shadow-1 cursor-pointer;
+    @apply w-[33%] bg-gray-300/50 text-4 text-center rounded-[10px] text-primary-500 shadow-1 cursor-pointer text-ellipsis;
   }
 
   .search-filters option{
@@ -338,11 +604,11 @@ body {
   }
 
   .exercise-list {
-    @apply w-full min-h-[85%] max-h-[85%] flex flex-col pt-2 gap-1 overflow-auto;
+    @apply w-full h-[85%] flex flex-col py-2 gap-1 overflow-auto;
   }
 
   .exercise-block {
-    @apply flex flex-col gap-1 text-primary-400 mx-2;
+    @apply flex flex-col gap-1 text-primary-400 mx-2 pb-2;
   }
 
   .exercise-block h2 {
@@ -350,7 +616,7 @@ body {
   }
 
   .exercise-card {
-    @apply h-7 items-center text-5 bg-gray-200 text-primary-900 rounded-[5px] px-1 transition-all duration-150 ease-in-out h-auto;
+    @apply items-center text-5 bg-gray-200 text-primary-900 rounded-[5px] px-1 transition-all duration-150 ease-in-out h-auto;
   }
 
   .exercise-card:hover {
@@ -363,6 +629,28 @@ body {
 
   .exercise-selected {
     @apply text-primary-700
+  }
+
+  @media (max-width: 640px){
+    .search-filters {
+      @apply p-2 w-full;
+    }
+
+    .search-filters select {
+      @apply w-[30%] text-1 text-ellipsis;
+    }
+
+    .search-filters option {
+      @apply text-2;
+    }
+
+    .exercise-card {
+      @apply text-2;
+    }
+
+    .exercise-info {
+      @apply text-1;
+    }
   }
 
   .add-exercise {
@@ -393,12 +681,50 @@ body {
     @apply outline-none;
   }
 
+  .create-workout-container {
+    @apply exercise-bank w-[60%] h-[70%]
+  }
+
   .create-workout {
-    @apply flex justify-center text-center my-auto items-center bg-green-300 w-[15%] h-[6%] text-5 rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-white;
+    @apply flex justify-center text-center my-auto items-center bg-green-300 w-auto h-auto px-2 p-1 text-5 rounded-[15px] tracking-[0.3em] shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-white;
+  }
+
+  .create-workout-title{
+    @apply workout-title text-8;
+  }
+
+  .create-workout-exercise-list {
+    @apply exercise-list text-center items-center overflow-auto w-full h-[70%] gap-y-2;
+  }
+
+  .create-workout-exercise-card {
+    @apply exercise-card flex flex-row justify-between mx-2 w-[60%] text-primary-500 shadow-1;
   }
 
   .create-workout:hover {
     @apply transform scale-105 shadow-1;
+  }
+
+  .create-workout-add-exercise {
+    @apply create-workout-exercise-card add-exercise-large justify-center bg-green-300 text-white text-4
+  }
+
+  @media (max-width: 640px) {
+    .create-workout-title {
+      @apply text-6
+    }
+
+    .workout-title-input {
+      @apply w-[90%] text-3
+    }
+
+    .create-workout-exercise-card {
+      @apply w-[90%] text-2
+    }
+
+    .create-workout-exercise-list {
+      @apply gap-y-2;
+    }
   }
 
   /* Workouts Page */
@@ -419,7 +745,7 @@ body {
   }
 
   .workout-card {
-    @apply flex items-center h-12 text-7 bg-gray-200 text-primary-500 px-2 rounded-[5px] cursor-pointer transition-all duration-150 ease-in-out;
+    @apply flex items-center text-7 bg-gray-200 text-primary-500 px-2 rounded-[5px] cursor-pointer transition-all duration-150 ease-in-out h-auto max-h-[90%];
   }
 
   .workout-card:hover {
@@ -427,7 +753,7 @@ body {
   }
 
   .display-exercises {
-    @apply flex flex-col gap-2 border-t-2 border-t-gray-300 p-2 w-full h-[80%] overflow-auto text-4;
+    @apply flex flex-col gap-2 border-t-2 border-t-gray-300 p-2 w-full overflow-auto text-4 h-[90%];
   }
 
   .workout-info {
@@ -450,17 +776,65 @@ body {
     @apply transform scale-105 shadow-1;
   }
 
+  @media (max-width: 640px) {
+    .workout-title {
+      @apply text-6 mt-auto;
+    }
+
+    .workout-card {
+      @apply text-4 p-1
+    }
+
+    .display-exercises {
+      @apply text-3
+    }
+
+    .create-workout {
+      @apply h-auto w-auto px-2 p-1 text-4;
+    }
+
+    .remove-exercise {
+      @apply scale-[0.8];
+    }
+
+    .add-exercise {
+      @apply scale-[0.8] py-0 px-3 text-3;
+    }
+
+    .exercise-search {
+      @apply text-3 h-auto p-1 mt-2;
+    }
+  }
+
   /* Start Workout*/
   .start-home {
-    @apply flex flex-col items-center justify-center h-screen w-screen bg-white text-5 text-white gap-y-2 sm:pt-[10%] md:pt-[5%] overflow-hidden;
+    @apply flex flex-col items-center justify-center h-screen w-screen bg-white text-5 text-white gap-y-2 pt-[10%] md:pt-[5%] overflow-hidden;
+  }
+
+  @media (max-width: 640px) {
+    .start-home {
+      @apply flex flex-col items-center justify-center h-screen w-screen bg-white text-5 text-white gap-y-2 pt-[10%];
+    }
   }
 
   .choose-workout-container {
     @apply flex flex-col items-center justify-center w-[80%] h-[90%] bg-gray-100 border-t-primary-500 border-t-[10px] rounded-t-[5px] rounded-b-[15px] shadow-3 text-primary-500 text-7 gap-y-8;
   }
 
+  @media (max-width: 640px) {
+    .choose-workout-container {
+      @apply w-[80%] h-[50%] text-5 gap-y-4 text-center;
+    }
+  }
+
   .select-workout {
     @apply items-center justify-center bg-gray-100 rounded-[10px] p-1 shadow-3 text-black text-7 min-w-[50%];
+  }
+
+  @media (max-width: 640px) {
+    .select-workout {
+      @apply items-center justify-center bg-gray-100 rounded-[10px] shadow-3 text-black text-5 min-w-[50%];
+    }
   }
 
   .select-workout option {
@@ -468,7 +842,13 @@ body {
   }
 
   .start-btn-small {
-    @apply flex justify-center text-center items-center bg-green-300 w-[25%] h-[8%] text-6 rounded-[25px] mx-auto shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-white text-bold;
+    @apply flex justify-center text-center items-center bg-green-300 w-auto h-auto text-6 rounded-[25px] mx-auto shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-white text-bold px-2 py-1;
+  }
+
+  @media (max-width: 640px) {
+    .start-btn-small {
+      @apply text-5;
+    }
   }
 
   .start-btn-small:hover {
@@ -484,7 +864,13 @@ body {
   }
 
   .start-workout-container {
-    @apply flex flex-col items-center justify-center w-[80%] h-[85%] bg-gray-100 border-t-primary-500 border-t-[10px] rounded-t-[5px] rounded-b-[15px] shadow-3 text-primary-500 text-7 gap-y-8;
+    @apply flex flex-col items-center justify-center w-[80%] h-[85%] bg-gray-100 border-t-primary-500 border-t-[10px] rounded-t-[5px] rounded-b-[15px] shadow-3 text-primary-500 text-7 gap-y-3;
+  }
+
+  @media (max-width: 640px) {
+    .start-workout-container {
+      @apply w-[95%] h-[65%] text-5 gap-y-0;
+    }
   }
 
   .start-workout-container .top-row {
@@ -492,19 +878,43 @@ body {
   }
 
   .start-workout-container .body {
-    @apply flex flex-row min-w-[75%] h-[100%] overflow-hidden justify-center bg-gray-200 shadow-2 rounded-[10px];
+    @apply flex flex-row min-w-[75%] max-h-full text-6 overflow-hidden justify-center bg-gray-200 shadow-2 rounded-[10px] relative z-0;
+  }
+
+  @media (max-width: 640px) {
+    .start-workout-container .body {
+      @apply min-w-[80%] text-4;
+    }
   }
 
   .start-workout-container .body .exercise-bank {
-    @apply max-h-[65%] min-h-[60%] mt-2
+    @apply max-h-[65%] min-h-[60%] mt-1
+  }
+  
+  @media (max-width: 640px) {
+    .start-workout-container .body .exercise-bank {
+      @apply max-h-full my-2 py-2
+    }
   }
 
   .start-workout-container .body .exercise-body {
-    @apply flex flex-col w-full h-full p-2 gap-y-2;
+    @apply flex flex-col w-full h-full p-2 gap-y-1;
+  }
+
+  @media (max-width: 640px) {
+    .start-workout-container .body .exercise-body {
+      @apply flex flex-col w-full h-full p-2 gap-y-1;
+    }
   }
 
   .start-workout-container .body .exercise-body .exercise-header {
     @apply flex flex-row text-primary-500 h-auto w-full;
+  }
+
+  @media (max-width: 640px) {
+    .start-workout-container .body .exercise-body .exercise-header {
+      @apply flex flex-row text-primary-500 h-auto w-full text-3;
+    }
   }
 
   .start-workout-container .body .exercise-body section {
@@ -515,12 +925,96 @@ body {
     @apply flex flex-col overflow-auto w-full h-full bg-gray-250 rounded-[5px]; 
   }
 
+  @media (max-width: 640px) {
+    .exercise-info-container {
+      @apply flex flex-col overflow-auto w-full h-full bg-gray-250 rounded-[5px]; 
+    }
+  }
+
+  .remove-exercise-btn {
+    @apply remove-exercise text-bold text-3 ml-1 mt-1 h-min;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+  }
+
   .add-exercise-body {
     @apply flex justify-center min-w-full min-h-full;
   }
 
+  .add-exercise-box {
+    @apply exercise-container mt-2 border-0 h-full 
+  }
+
+  .add-exercise-box .exercise-bank {
+    @apply h-full m-0
+  }
+
+  .add-exercise-box h2 {
+    @apply text-4
+  }
+
+  .add-exercise-box .exercise-block h3 {
+    @apply text-3
+  }
+
+  .add-exercise-box .exercise-block {
+    @apply gap-y-1 pb-0
+  }
+
+  @media (max-width: 640px) {
+    .add-exercise-box h2 {
+      @apply text-3
+    }
+
+    .add-exercise-box .exercise-block h3 {
+      @apply text-2
+    }
+  }
+
   .add-exercise-body .add-exercise-large {
     @apply text-white w-[20%] h-[10%] my-auto text-8;
+  }
+
+  @media (max-width: 640px) {
+    .add-exercise-body .add-exercise-large {
+      @apply text-white w-[30%] h-[10%] my-auto text-6;
+    }
+  }
+
+  .set-input {
+    @apply flex flex-row w-full justify-end;
+  }
+
+  @media (max-width: 640px) {
+    .set-input {
+      @apply flex flex-row w-full justify-end gap-x-6;
+    }
+  }
+
+  .set-section {
+    @apply flex w-[20%] flex-col;
+  }
+
+  @media (max-width: 640px) {
+    .set-section {
+      @apply flex w-[50%] flex-col;
+    }
+  }
+
+  .set-section input {
+    @apply w-[50%] h-auto rounded-[10px] px-2 text-6 shadow-1 text-black;
+  }
+
+  @media (max-width: 640px) {
+    .set-section input {
+      @apply w-full  h-auto rounded-[10px] px-2 text-4 shadow-1 text-black;
+    }
+  }
+
+  .change-exercise-button {
+    @apply m-2
   }
 
   .set-buttons {
@@ -528,27 +1022,23 @@ body {
   }
 
   .set-buttons button {
-    @apply w-[20%] h-[100%] rounded-[25px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-5 text-white px-2;
+    @apply w-auto h-[100%] rounded-[25px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-5 text-white px-2;
   }
 
-  .set-input {
-    @apply flex flex-row w-full justify-end;
-  }
-
-  .set-section {
-    @apply flex w-[20%] flex-col;
-  }
-
-  .set-section input {
-    @apply w-[50%] h-auto rounded-[10px] px-2 text-6 shadow-1 text-black;
-  }
-
-  .change-exercise-button {
-    @apply m-2
+  @media (max-width: 640px) {
+    .set-buttons button {
+      @apply w-auto h-[100%] rounded-[25px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-2 text-white px-2;
+    }
   }
 
   .finish-workout-button {
-    @apply flex justify-center text-center items-center bg-primary-500 w-[10%] h-[7%] text-6 rounded-[15px] mx-auto shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-white text-bold mb-2;
+    @apply flex justify-center text-center items-center bg-primary-500 w-auto h-[7%] text-6 rounded-[15px] mx-auto shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-white text-bold p-4 tracking-widest;
+  }
+
+  @media (max-width: 640px) {
+    .finish-workout-button {
+      @apply flex justify-center text-center items-center bg-primary-500 w-auto p-4 h-[7%] text-5 rounded-[15px] mx-auto shadow-2 cursor-pointer transition-all duration-150 ease-in-out text-white text-bold m-2;
+    }
   }
 
   /* Workout Review */
@@ -568,10 +1058,295 @@ body {
     @apply bg-primary-300 flex flex-col justify-between p-4 rounded-[5px] shadow-2 w-[90%] max-h-[80%];
   }
 
+  /* Workout History */
+  .workout-history {
+    @apply flex flex-col items-center justify-center h-[90%] w-[45%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] overflow-y-auto shadow-3;
+  }
+
+  .workout-history h1 {
+    @apply text-8 text-bold;
+  }
+
+  .workout-history h2 {
+    @apply text-3 text-bold;
+  }
+
+  .workout-history h3 {
+    @apply text-3 text-bold;
+  }
+
+  .workout-history p {
+    @apply text-3;
+  }
+
+  .workout-history-list {
+    @apply flex flex-col p-5 bg-primary-500 rounded-[5px] shadow-2 overflow-y-auto gap-y-2 items-center h-[80%] w-[65%];
+  }
+
+  .workout-history-info {
+    @apply bg-primary-300 flex flex-col justify-center p-4 rounded-[5px] shadow-2 w-[90%] max-h-[80%];
+  }
+
+  .workout-history-card {
+    @apply flex flex-row justify-between items-center p-2 border-b-[3px] border-gray-100 overflow-visible;
+  }
+
+  .workout-history-card p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .workout-history-details {
+    @apply flex flex-col text-2 overflow-y-auto;
+  }
+
+  .workout-history-item {
+    @apply border-b-[3px] rounded-[3px] border-gray-250 py-1
+  }
+
+  @media (max-width: 640px) {
+    .workout-history {
+      @apply flex flex-col items-center justify-center h-[90%] w-[75%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] overflow-auto shadow-3;
+    }
+
+    .workout-history h1 {
+      @apply text-6 text-bold;
+    }
+  
+    .workout-history h2{
+      @apply text-3 text-bold
+    }
+
+    .workout-history h3 {
+      @apply text-1 text-bold
+    }
+  
+    .workout-history p {
+      @apply text-1;
+    }
+
+    .workout-history-list {
+      @apply flex flex-col p-5 bg-primary-500 rounded-[5px] shadow-2 gap-y-2 items-center h-[80%] w-[80%];
+    }
+  
+    .workout-history-info {
+      @apply bg-primary-300 flex flex-col justify-center p-3 rounded-[5px] shadow-2 w-[90%] max-h-[80%];
+    }
+  
+    .workout-history-card {
+      @apply flex flex-row justify-between gap-x-1 items-center p-1 border-b-[3px] border-gray-100;
+    }
+  
+    .workout-history-details {
+      @apply flex flex-col text-2 overflow-auto;
+    }
+  
+    .workout-history-item {
+      @apply border-b-[3px] rounded-[3px] border-gray-250 py-1
+    }
+  }
+
+  /* Statistics */
+  .statistics {
+    @apply flex flex-col items-center h-[90%] w-[50%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] overflow-auto shadow-3 pt-4;
+  }
+
+  .statistics h1 {
+    @apply text-8 text-bold;
+  }
+
+  .statistics h2 {
+    @apply text-3 text-bold;
+  }
+
+  .statistics-info {
+    @apply bg-primary-300 flex flex-col justify-between p-6 mb-4 rounded-[5px] shadow-2 w-[50%] max-h-[80%];
+  }
+
+  .statistics-button {
+    @apply w-auto h-auto p-2 bg-green-300 text-white rounded-[10px] shadow-2 cursor-pointer m-2 tracking-[0.15em] text-3 transition-all duration-150 ease-in-out;
+  }
+
+  .statistics-redirect-text {
+    @apply text-4 text-center justify-center
+  }
+
+  @media (max-width: 640px) {
+    .statistics {
+      @apply flex flex-col items-center h-[85%] w-[75%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] overflow-auto shadow-3 pt-4;
+    }
+
+    .statistics h1 {
+      @apply text-6 text-bold;
+    }
+
+    .statistics h2 {
+      @apply text-3 text-bold;
+    }
+
+    .statistics-info {
+      @apply bg-primary-300 flex flex-col justify-between p-3 mb-4 rounded-[5px] shadow-2 w-[90%] max-h-[80%];
+    }
+
+    .statistics-button {
+      @apply w-auto h-auto p-2 bg-green-300 text-white rounded-[10px] shadow-2 cursor-pointer m-2 tracking-[0.15em] text-3 transition-all duration-150 ease-in-out;
+    }
+
+    .statistics-redirect-text {
+      @apply text-4 text-center justify-center
+    }
+  }
+
+  /* Friends */
+  .friends {
+    @apply flex flex-col items-center h-[90%] w-[50%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] overflow-auto shadow-3 pt-4;
+  }
+
+  .friends h1 {
+    @apply text-8 text-bold;
+  }
+
+  .friends h2 {
+    @apply text-3 text-bold;
+  }
+
+  .friends-info {
+    @apply bg-primary-300 flex flex-col justify-between p-6 mb-4 rounded-[5px] shadow-2 w-[80%] h-[80%];
+  }
+
+  .friends-search-box {
+    @apply flex flex-row justify-between gap-x-2
+  }
+
+  .friends-search {
+    @apply w-full h-auto bg-transparent text-4 text-primary-700 rounded-t-[5px] bg-gray-100 border-b-primary-300 border-b-[2.5px] px-1;
+  }
+
+  .friends-search:focus {
+    @apply outline-none border-b-primary-400;
+  }
+
+  .friend-search-btn {
+    @apply px-2 bg-green-300 text-white rounded-[15px] cursor-pointer transition-all duration-150 ease-in-out text-3 w-auto ml-2;
+  }
+
+  .friend-search-btn:hover {
+    @apply bg-green-200;
+  }
+
+  .friends-error {
+    @apply text-left text-3 h-[1.5em];
+  }
+
+  .friends-error:not(:empty) {
+    animation: fadeaway 3s ease-in-out forwards;
+  }
+
+  .friends-search-btn:active ~ .friends-error {
+    animation: fadeaway 3s ease-in-out forwards;
+  }
+
+  .friends-list {
+    @apply flex flex-col w-full h-full bg-primary-100 rounded-b-[10px] shadow-1 overflow-auto;
+  }
+
+  .friends-list-item {
+    @apply flex flex-row justify-between m-2 border-b-[2.5px] pb-1; 
+  }
+
+  .friends-request-item {
+    @apply items-center text-bold flex flex-row shadow-1 p-1 justify-between m-2 bg-primary-200; 
+  }
+
+  .friends-request-options {
+    @apply flex flex-row justify-between gap-x-1 px-1; 
+  }
+
+  .friends-request-options button:hover {
+    @apply scale-[1.01] shadow-3
+  }
+
+  .request-accept-btn {
+   @apply w-auto h-auto bg-green-300 text-white rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out px-2 text-5; 
+  }
+
+  .request-decline-btn {
+    @apply w-auto h-auto bg-red-300 text-white rounded-[15px] shadow-2 cursor-pointer transition-all duration-150 ease-in-out px-2 text-5;
+  }
+
+  .friends-tab-btn {
+    @apply w-auto h-auto bg-gradient-to-r from-primary-200 to-primary-400 text-white rounded-[10px] shadow-2 cursor-pointer tracking-[0.3em] text-5 transition-all duration-150 ease-in-out px-2 py-1 mb-3;
+  }
+
+  .friends-tab-btn:hover {
+    @apply transform scale-105 shadow-1;
+  }
+
+  .request-tab-btn {
+    @apply  friends-tab-btn from-primary-400 to-primary-200;
+  }
+
+  @media (max-width: 640px) {
+    .friends {
+      @apply flex flex-col items-center h-[85%] w-[75%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] overflow-auto shadow-3 pt-4;
+    }
+
+    .friends h1 {
+      @apply text-6 text-bold;
+    }
+
+    .friends h2 {
+      @apply text-3 text-bold;
+    }
+
+    .friends-info {
+      @apply bg-primary-300 flex flex-col justify-between p-3 mb-4 rounded-[5px] shadow-2 w-[90%] h-[80%];
+    }
+
+    .friends-search-bpx {
+      @apply flex flex-row justify-between gap-x-2
+    }
+
+    .friends-search {
+      @apply w-[80%] h-auto bg-transparent text-4 text-primary-700 rounded-t-[5px] bg-gray-100 border-b-primary-300 border-b-[2.5px] pl-1;
+    }
+
+    .friends-search:focus {
+      @apply outline-none border-b-primary-400;
+    }
+
+    .friends-list {
+      @apply flex flex-col w-full h-full bg-primary-100 rounded-b-[10px] shadow-1 overflow-auto;
+    }
+
+    .friends-request-item {
+      @apply items-center text-3 text-bold flex flex-row shadow-1 p-1 justify-between bg-primary-200; 
+    }
+
+    .friends-request-options {
+      @apply flex flex-col justify-between gap-y-1 px-1; 
+    }
+
+    .friends-request-options button:hover {
+      @apply scale-[1.01] shadow-3
+    }
+
+    .request-accept-btn {
+      @apply w-auto h-auto bg-green-300 text-white rounded-[15px] shadow-1 cursor-pointer transition-all duration-150 ease-in-out px-2 text-1; 
+    }
+
+    .request-decline-btn {
+      @apply request-accept-btn bg-red-300;
+    }
+  }
+
+
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
     background-color: lightgray;
-    border-radius: 8px;
+    border-radius: 2px;
+    scrollbar-gutter: auto;
   }
 }

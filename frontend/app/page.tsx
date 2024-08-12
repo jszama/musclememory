@@ -20,7 +20,6 @@ export default function Home() {
   return (
     <main className="home-page ">
       <div className="btn-container">
-
         <section className='start-btn'>
           <Link href='/start'>
             START

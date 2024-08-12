@@ -5,11 +5,11 @@ export default function LoginPage() {
     return (
         <main className="login-page">
             <div className="login-box">
-                <div>
+                <div className='login-content'>
                     <h1>Sign in</h1>
                     <LoginForm />
                 </div>
-                <p>Don&apos;t have an account? <Link className='redirect' href='/register'>Sign up</Link></p>
+                <p className='redirect-text'>Don&apos;t have an account? <Link className='redirect' href='/register'>Sign up</Link></p>
             </div>
         </main>
     )

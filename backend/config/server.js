@@ -6,6 +6,7 @@ const exerciseRoutes = require('../routes/exerciseRoutes');
 const userRoutes = require('../routes/userRoutes');
 const workoutRoutes = require('../routes/workoutRoutes');
 const completedWorkoutsRoutes = require('../routes/completedWorkouts');
+const friendsRoutes = require('../routes/friendsRoutes');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/exercises', exerciseRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/completed_workouts', completedWorkoutsRoutes);
+app.use('/api/friends', friendsRoutes);
 
 app.use((req, res) => {
     res.status(404).json({ message: `Route not found: ${req.originalUrl}` });

@@ -19,7 +19,6 @@ export default function WorkoutContainer() {
             .then(response => response.json())
             .then(data => {
                 setWorkouts(data);
-                console.log(data)
                 noWorkouts = !data || data.length === 0;
                 noWorkoutsRef.current = noWorkouts;
                 setIsLoading(false);

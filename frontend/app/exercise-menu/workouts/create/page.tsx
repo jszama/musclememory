@@ -15,7 +15,7 @@ export default function CreateWorkout() {
     return (
         <main className="home-page">
             <div className="exercise-container">
-            <h1 className="workout-title text-8">Create Workout</h1>
+            <h1 className="create-workout-title">Create Workout</h1>
                 { pickMode ? <ExercisePicker exercisesPicked={exercises} pickMode={[pickMode, setPickMode]} setPickMode={function (mode: boolean): void {
                     setPickMode(mode);
                 } } /> : <WorkoutCreater exercisesPicked={exercises} pickMode={[pickMode, setPickMode]} setPickMode={function (mode: boolean): void {

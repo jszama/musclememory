@@ -48,7 +48,7 @@ export default function ExerciseScreen({ exercise, onUpdateExercise }: ExerciseS
 
     return (
         <div className='exercise-body'>
-            <h2 className='text-center text-8'> {exercise.exercise.name} </h2>
+            <h2 className='text-center'> {exercise.exercise.name} </h2>
             <div className='exercise-info-container'>
                 {sets.map((_, index) => (
                     <div className='exercise-header' key={index}>
@@ -61,7 +61,7 @@ export default function ExerciseScreen({ exercise, onUpdateExercise }: ExerciseS
                                 <p>Reps</p>
                                 <input
                                     type="number"
-                                    value={reps[index]}
+                                    value={reps[index] || ''}
                                     onChange={(event) => handleRepsChange(index, Number(event.target.value))}
                                 />
                             </section>
@@ -70,7 +70,7 @@ export default function ExerciseScreen({ exercise, onUpdateExercise }: ExerciseS
                                 <div className='flex flex-row gap-x-1 text-3'>
                                     <input
                                         type="number"
-                                        value={weight[index]}
+                                        value={weight[index] || ''}
                                         onChange={(event) => handleWeightChange(index, Number(event.target.value))}
                                     /> kg
                                 </div>

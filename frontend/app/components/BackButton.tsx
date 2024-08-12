@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
-export default function BackButton() {
+function BackButton() {
     const router = useRouter();
     const pathname = usePathname();
     const isHomePage = (pathname === '/');
@@ -28,3 +28,5 @@ export default function BackButton() {
     </>
     );
 }
+
+export default React.memo(BackButton);

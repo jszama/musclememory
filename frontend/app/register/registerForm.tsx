@@ -89,7 +89,7 @@ export default function RegisterPage() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='register-form' onSubmit={handleSubmit}>
             <input type="text" id="name" name="name" placeholder='Name' required
                 onChange={
                     (e) => setName(e.target.value)

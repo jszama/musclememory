@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
 
 const { validateUserInput, validateExists, hashPassword, validLogin, generateToken } = require('./utils/utils.js');
+const { uploadFile } = require('../config/upload');
 
 // Register a new user
 const registerUser = asyncHandler(async (req, res) => {
@@ -67,13 +68,15 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const getLoggedInUser = asyncHandler(async (req, res) => {
-    const { _id, name, email } = await User.findById(req.user._id);
+    const { _id, name, email, bio, profilePic } = await User.findById(req.user._id);
 
     if (req.user) {
         res.status(200).json({
             _id,
             name,
-            email
+            email,
+            bio,
+            profilePic
         });
     } else {
         res.status(404);
@@ -81,8 +84,38 @@ const getLoggedInUser = asyncHandler(async (req, res) => {
     }
 });
 
+// Update user profile
+const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    user.bio = req.body.bio || user.bio;
+
+    if (req.file) {
+        try {
+            const fileBuffer = req.file.buffer;
+
+            const location = await uploadFile(fileBuffer, user._id.toString());
+            user.profilePic = location;
+        } catch (error) {
+            console.error(`Failed to upload file: ${error.message}`);
+            return res.status(500).json({ error: `Failed to upload file: ${error.message}` });
+        }
+    }
+
+    await user.save();
+
+    res.status(200).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+        profilePic: user.profilePic
+    });
+});
+
 module.exports = {
     registerUser,
     loginUser,
-    getLoggedInUser
+    getLoggedInUser,
+    updateUserProfile
 };

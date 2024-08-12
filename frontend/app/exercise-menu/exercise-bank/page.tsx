@@ -7,7 +7,7 @@ export default function ExerciseBank() {
 
     return (
         <main className="home-page">
-            <div className="exercise-container p-2">
+            <div className="exercise-container">
                 <ExerciseList />
             </div>
         </main>

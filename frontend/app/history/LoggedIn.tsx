@@ -12,7 +12,6 @@ export default function LoggedIn() {
         fetch(`http://localhost:3001/api/completed_workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setHistory(data)
              })
             .catch(err => console.error(err))

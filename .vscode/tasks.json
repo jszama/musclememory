@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Frontend Dev Server",
+            "type": "shell",
+            "command": "cd .\\frontend\\ ; npx next dev",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Backend Server",
+            "type": "shell",
+            "command": "cd .\\backend\\config; nodemon index.js",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "DB_CON" :"mongodb+srv://jmszamotulski:musclememory@musclememory.juetskq.mongodb.net/?retryWrites=true&w=majority&appName=musclememory",
+                    "JWT_SECRET":"muscles",
+                    "API_PORT":"3001"
+                },
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Run All Servers",
+            "dependsOn": [
+                "Frontend Dev Server",
+                "Backend Server"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+  }
+  
