@@ -34,7 +34,8 @@ export default function ReviewScreen() {
     }
 
     return (
-        <main className="start-home">
+        <React.Suspense fallback={<div>Loading...</div>}>
+            <main className="start-home">
             <section className="completed-workout">
                 <h1>{ completedWorkout.name } Completed</h1>
                 <div className="completed-workout-info">
@@ -65,6 +66,7 @@ export default function ReviewScreen() {
                 </div>
                 <Link href='/' className="start-btn-small mb-4">Continue</Link>
             </section>
-        </main>
+            </main>
+        </React.Suspense>
     );
 }
