@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@types/react": "^18.2.60",
+    "@vercel/speed-insights": "^1.0.12",
     "next": "^14.2.3",
     "tailwindcss": "^3.4.1"
   }
