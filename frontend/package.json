@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/roboto": "^5.0.12",
+    "@vercel/speed-insights": "^1.0.12",
     "caniuse-lite": "^1.0.30001649",
     "compressorjs": "^1.2.1",
     "next": "14.1.0",
