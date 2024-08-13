@@ -2,6 +2,7 @@
 
 import { CompletedWorkout } from "../components/interfaces"
 import React from "react";
+import { Suspense } from 'react'
 import { useSearchParams } from "next/navigation";
 import Link  from "next/link";
 
@@ -34,7 +35,7 @@ export default function ReviewScreen() {
     }
 
     return (
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
             <main className="start-home">
             <section className="completed-workout">
                 <h1>{ completedWorkout.name } Completed</h1>
@@ -67,6 +68,6 @@ export default function ReviewScreen() {
                 <Link href='/' className="start-btn-small mb-4">Continue</Link>
             </section>
             </main>
-        </React.Suspense>
+        </Suspense>
     );
 }
