@@ -10,7 +10,7 @@ export default function WorkoutPicker({ pickedWorkout, setPickedWorkout }: Worko
     const [workouts, setWorkouts] = useState([] as Workout[])
     
     useEffect(() => {
-        fetch(`http://localhost:3001/api/workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
+        fetch(`https://musclememory-backend.onrender.com/api/workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
             .then(res => res.json())
             .then(data => setWorkouts(data))
             .catch(err => console.error(err))

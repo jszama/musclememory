@@ -9,7 +9,7 @@ export default function LoggedIn() {
     const dateRef = useRef(new Date())
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/completed_workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
+        fetch(`https://musclememory-backend.onrender.com/api/completed_workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
             .then(res => res.json())
             .then(data => {
                 setHistory(data)

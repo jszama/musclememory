@@ -24,14 +24,14 @@ export default React.memo(function AccountPage() {
                 if (!token) throw new Error('No token found');
     
                 const [userResponse, friendsResponse, s3Response] = await Promise.all([
-                    fetch('http://localhost:3001/api/user/profile', {
+                    fetch('https://musclememory-backend.onrender.com/api/user/profile', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
                         },
                     }),
-                    fetch(`http://localhost:3001/api/friends/${document.cookie.split(';')[0].split('=')[1]}`, {
+                    fetch(`https://musclememory-backend.onrender.com/api/friends/${document.cookie.split(';')[0].split('=')[1]}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default React.memo(function AccountPage() {
             try {
                 const token = document.cookie.split(';')[1].split('=')[1]
 
-                const response = await fetch('http://localhost:3001/api/user/profile', {
+                const response = await fetch('https://musclememory-backend.onrender.com/api/user/profile', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ export default React.memo(function AccountPage() {
             const token = document.cookie.split(';')[1]?.split('=')[1];
             if (!token) throw new Error('No token found.');
     
-            const response = await fetch('http://localhost:3001/api/user/profile', {
+            const response = await fetch('https://musclememory-backend.onrender.com/api/user/profile', {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`

@@ -47,7 +47,7 @@ export default function ExerciseList() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/exercises')
+        fetch('https://musclememory-backend.onrender.com/api/exercises')
             .then(response => response.json())
             .then(data => {
                 setExercises(data);

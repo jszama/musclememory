@@ -26,7 +26,7 @@ export default function LoginForm() {
     }
 
     const loginUser = async () => {
-        const response = await fetch('http://localhost:3001/api/user/login', {
+        const response = await fetch('https://musclememory-backend.onrender.com/api/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

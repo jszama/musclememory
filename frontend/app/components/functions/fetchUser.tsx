@@ -1,7 +1,7 @@
 
 
 async function fetchUser() {
-    const response = await fetch('http://localhost:3001/api/user/profile', {
+    const response = await fetch('https://musclememory-backend.onrender.com/api/user/profile', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

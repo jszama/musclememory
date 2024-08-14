@@ -52,7 +52,7 @@ export default function RegisterPage() {
     }
 
     const registerUser = async (name: string, email: string, password: string) => {
-        const response = await fetch('http://localhost:3001/api/user/register', {
+        const response = await fetch('https://musclememory-backend.onrender.com/api/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -15,7 +15,7 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
     const CreateWorkout = () => {
         const workoutTitleInput = document.querySelector('.workout-title-input') as HTMLInputElement;
 
-        fetch('http://localhost:3001/api/workouts/create', {
+        fetch('https://musclememory-backend.onrender.com/api/workouts/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ export default function WorkoutList({ workoutsProp }: { workoutsProp: Workout[] 
                     <div className='flex flex-row justify-between w-full'>
                         <h2>{workout.name}</h2>
                         <button className='remove-exercise' onClick={() => {
-                            fetch(`http://localhost:3001/api/workouts/${workout._id}`, {
+                            fetch(`https://musclememory-backend.onrender.com/api/workouts/${workout._id}`, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',

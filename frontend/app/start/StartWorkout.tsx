@@ -178,7 +178,7 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
 
                     if (loggedIn) {
                         try {
-                            const response = await fetch('http://localhost:3001/api/completed_workouts/add', {
+                            const response = await fetch('https://musclememory-backend.onrender.com/api/completed_workouts/add', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'

@@ -15,11 +15,11 @@ export default function LoggedIn() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                fetch(`http://localhost:3001/api/friends/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
+                fetch(`https://musclememory-backend.onrender.com/api/friends/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
                     setFriends(data)
                 });
                 
-                fetch(`http://localhost:3001/api/friends/requests/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
+                fetch(`https://musclememory-backend.onrender.com/api/friends/requests/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
                     setFriendRequests(data)
                 });
             } catch (err) {
@@ -34,7 +34,7 @@ export default function LoggedIn() {
         e.preventDefault();
         
         try {
-            const res = await fetch(`http://localhost:3001/api/friends/add`, {
+            const res = await fetch(`https://musclememory-backend.onrender.com/api/friends/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ export default function LoggedIn() {
     
 
     const acceptRequest = (requestSender: string) => {
-        fetch(`http://localhost:3001/api/friends/accept`, {
+        fetch(`https://musclememory-backend.onrender.com/api/friends/accept`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ export default function LoggedIn() {
     }
 
     const declineRequest = (requestSender: string) => {
-        fetch(`http://localhost:3001/api/friends/accept`, {
+        fetch(`https://musclememory-backend.onrender.com/api/friends/accept`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -140,7 +140,7 @@ export default function LoggedIn() {
                                 <div key={id} className="friends-list-item">
                                     <li>{name}</li>
                                     <button className='remove-exercise' onClick={() => {
-                                        fetch(`http://localhost:3001/api/friends/${id.toString()}`, {
+                                        fetch(`https://musclememory-backend.onrender.com/api/friends/${id.toString()}`, {
                                             method: 'DELETE',
                                             headers: {
                                                 'Content-Type': 'application/json',
