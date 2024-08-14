@@ -1,6 +1,3 @@
-console.log(__dirname); // prints the directory of the current module
-console.log(require.resolve('../middleWare/authMiddleware')); // prints the resolved path of the module
-
 const db = require('./database');
 const server = require('./server'); 
 require('dotenv').config();
