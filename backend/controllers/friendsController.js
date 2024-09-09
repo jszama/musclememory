@@ -79,6 +79,11 @@ const acceptRequest = asyncHandler(async (req, res) => {
     });
 
     await FriendRequest.deleteOne({
+        user_id: friend,
+        friend_id: user
+    });
+
+    await FriendRequest.deleteOne({
         user_id: user,
         friend_id: friend
     });
