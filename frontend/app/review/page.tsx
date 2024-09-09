@@ -41,7 +41,7 @@ export default function ReviewScreen() {
                 <h1>{ completedWorkout.name } Completed</h1>
                 <div className="completed-workout-info">
                     <h2><span className="text-bold">Total Volume:</span> { totalVolume }kg</h2>
-                    <section className="flex flex-row justify-around w-full gap-x-4">        
+                    <section className="completed-workout-container">        
                         <section>
                             <h2 className="text-bold">Exercises</h2>
                             <ul className="completed-workout-list">

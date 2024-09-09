@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Workout, Exercise, CompletedWorkout, ActiveExercise } from '../components/interfaces';
-import ExercisePicker from '../exercise-menu/workouts/create/exercisePicker';
+import ExercisePicker from './exercisePicker';
 import ExerciseScreen from './exerciseScreen';
 import { useRouter } from 'next/navigation';
-import { act } from 'react-dom/test-utils';
 
 interface WorkoutPickerProps {
     pickedWorkout: Workout[];
@@ -78,18 +77,9 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
 
     const addExerciseBody = (
         <ExercisePicker
-            exercisesPicked={selectedWorkout.exercises}
+            exercisesPicked={activeExercises}
             pickMode={[true]}
-            setPickMode={async (mode: boolean) => {
-                const newExercise = {
-                    exercise: selectedWorkout.exercises[currentExerciseIndex],
-                    sets: [1],
-                    reps: [0],
-                    weight: [0]
-                };
-
-                const curr = [...activeExercises, newExercise];
-                setActiveExercises(curr);
+            setPickMode={async () => {
                 setAddExercise(false);
                 setShowButton(false);
             }}
@@ -132,13 +122,15 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
                         ) : (
                                 <>  
                                     <button className='remove-exercise-btn' onClick={() => {
-                                            if (currentExerciseIndex > 0) {
-                                                setCurrentExerciseIndex(currentExerciseIndex - 1)
-                                            } else {
-                                                setShowButton(true)
-                                            }
-                                            setActiveExercises(activeExercises.filter((exercise, index) => index !== currentExerciseIndex))
-                                        }}>
+                                        if (activeExercises.length > 1) {
+                                            const updatedExercises = activeExercises.filter((_, index) => index !== currentExerciseIndex);
+                                    
+                                            setActiveExercises(updatedExercises);
+                                            setCurrentExerciseIndex(prevIndex => Math.min(prevIndex, updatedExercises.length - 1));
+                                        } else {
+                                            setShowButton(true);
+                                        }
+                                    }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <line x1="15" y1="9" x2="9" y2="15" />
                                             <line x1="9" y1="9" x2="15" y2="15" />
@@ -185,7 +177,7 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
                                 },
                                 body: JSON.stringify(completed)
                             });
-                            const data = await response.json();
+                            await response.json();
                             router.replace(`/review?workout=${JSON.stringify(completed)}`);
                         } catch (err) {
                             console.error(err);
