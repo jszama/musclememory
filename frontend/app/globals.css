@@ -591,6 +591,10 @@ body {
     @apply w-[80%] max-h-[80%] min-h-[80%] bg-gray-100 shadow-1 mt-6 rounded-t-[5px] rounded-b-[15px];
   }
 
+  .workout-bank {
+    @apply exercise-bank mt-0 min-h-[70%] max-h-[70%];
+  }
+
   .search-filters {
     @apply flex flex-row justify-between px-4 w-full h-[9%] bg-gray-200 text-start items-center p-4 text-6 border-b-2 border-b-gray-300;
   }
