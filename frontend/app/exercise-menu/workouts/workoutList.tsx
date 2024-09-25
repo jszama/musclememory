@@ -56,7 +56,7 @@ export default function WorkoutList({ workoutsProp }: { workoutsProp: Workout[] 
     
     return (
         <>
-        <section className="exercise-bank h-[65%]">
+        <section className="workout-bank">
                 <section className="workout-list">
                     {workoutList()}
                 </section>

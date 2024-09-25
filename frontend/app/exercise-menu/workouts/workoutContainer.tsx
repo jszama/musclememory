@@ -32,7 +32,7 @@ export default function WorkoutContainer() {
     return (
         <>
             {isLoading ? null : (
-                noWorkoutsRef.current ? <FirstWorkout /> : <WorkoutList workoutsProp={workouts} />
+                noWorkoutsRef.current ? <FirstWorkout /> : <WorkoutList workoutsProp={workouts}/>
             )}
         </>
     )
