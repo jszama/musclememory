@@ -37,7 +37,7 @@ export default React.memo(function AccountPage() {
                             'Content-Type': 'application/json',
                         },
                     }),
-                    fetch(`https://musclememory-profilepictures.s3.amazonaws.com/${document.cookie.split(';')[0].split('=')[1]}`, {
+                    fetch(`https://musclememory-profilepictures.s3.amazonaws.com/${document.cookie.split(';')[0].split('=')[1]}?v=${Date.now()}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -145,6 +145,7 @@ export default React.memo(function AccountPage() {
             if (!response.ok) throw new Error('Failed to update profile picture');
             const data = await response.json();
             setError('Profile picture updated.');
+            setProfilePicture(URL.createObjectURL(file));
         } catch (error: any) {
             setError(`An error occurred during the request: ${error.message}`);
             console.error(error);
