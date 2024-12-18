@@ -6,7 +6,7 @@ export default function Guest() {
     return (
         <div className="guest-screen">
             <p>
-                Create an account to be able to view your workout history and access our full range of services!
+                Create an account to be able to view your workout statistics and access our full range of services!
             </p>
             <button className="start-btn-small" onClick={() => router.replace('/register')}>
                 Create account
