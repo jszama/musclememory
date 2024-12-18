@@ -2,20 +2,22 @@ const mongoose = require('mongoose');
 
 const completedWorkoutSchema = new mongoose.Schema({
     user_id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     name: {
         type: String,
         required: true
     },
-    exercises: {
-        type: Array,
+    exercises: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Exercise',
         required: true
-    },
+    }],
     date: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     }
 });
 
