@@ -40,7 +40,7 @@ export default function ReviewScreen() {
     }
 
     return (
-        <Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
             <main className="start-home">
                 <section className="review-container">
                     <h1>{ completedWorkout.name } Completed</h1>
