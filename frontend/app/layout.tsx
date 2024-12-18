@@ -6,7 +6,7 @@ import React from "react";
 import Header from "./components/Header";
 import BackButton from "./components/BackButton";
 
-import { SpeedInsights } from "@vercel/speed-insights/next"
+// import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "MuscleMemory",
@@ -28,7 +28,6 @@ export default function RootLayout({
   return (
     <>
       <html lang="en">
-        <SpeedInsights/>
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </head>
