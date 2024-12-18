@@ -26,7 +26,7 @@ interface ActiveExercise {
     sets: number[];
     reps: number[];
     weight: number[];
-    unilateral: boolean;
+    //unilateral: boolean;
 }
 
 interface CompletedWorkout {
