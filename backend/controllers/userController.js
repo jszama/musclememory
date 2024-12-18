@@ -93,6 +93,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     if (req.file) {
         try {
             const fileBuffer = req.file.buffer;
+            
+            if (req.file.size > 5120) {
+                return res.status(500).json({ error: "File size must not exceed 5MB" });
+            }
 
             const location = await uploadFile(fileBuffer, user._id.toString());
             user.profilePic = location;
