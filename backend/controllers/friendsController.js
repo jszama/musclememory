@@ -11,8 +11,8 @@ const getFriends = asyncHandler(async (req, res) => {
     let data = [n];
 
     for (let i = 0; i < friends.length; i++) {
-        let target = friends[i].user_id === req.params.id ? (friends[i].friend_id) : (friends[i].user_id).toString();
-        data[i] = [target, await getUserById(target)];
+        let friend_user_id = friends[i].user_id === req.params.id ? (friends[i].friend_id) : (friends[i].user_id).toString();
+        data[i] = [friend_user_id, await getUserById(friend_user_id)];
     }
 
     res.json(data);
@@ -27,14 +27,14 @@ const getFriendRequests = asyncHandler(async (req, res) => {
     let data = [n];
 
     for (let i = 0; i < requests.length; i++) {
-        let target = requests[i].user_id.toString();
-        data[i] = [target, await getUserById(target)];
+        let request_sender_user_id = requests[i].user_id.toString();
+        data[i] = [request_sender_user_id, await getUserById(request_sender_user_id)];
     }
 
     res.json(data);
 });
 
-const addFriend = asyncHandler(async (req, res) => {
+const sendRequest = asyncHandler(async (req, res) => {
     let { user, friend } = req.body;
 
     try {
@@ -88,7 +88,7 @@ const acceptRequest = asyncHandler(async (req, res) => {
         friend_id: friend
     });
 
-    const converted = [newFriend.friend_id, getUserByName(newFriend.friend_id)];
+    const converted = [newFriend.friend_id, getUserById(newFriend.friend_id)];
 
     res.status(201).json(converted);
 });
@@ -97,8 +97,8 @@ const declineRequest = asyncHandler(async (req, res) => {
     let { user, friend } = req.body
     
     FriendRequest.deleteOne({
-        user_id: user,
-        friend_id: friend
+        user_id: friend,
+        friend_id: user
     })
 
     res.status(204).json({
@@ -118,4 +118,4 @@ const deleteFriend = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { getFriends, addFriend, acceptRequest, declineRequest, deleteFriend, getFriendRequests };
+module.exports = { getFriends, sendRequest, acceptRequest, declineRequest, deleteFriend, getFriendRequests };
