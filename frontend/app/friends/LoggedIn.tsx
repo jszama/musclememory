@@ -8,15 +8,16 @@ export default function LoggedIn() {
     const [query, setQuery] = useState('')
     const [error, setError] = useState<string>('')
 
+    const [isLoading, setIsLoading] = useState(true)
+
     const [showRequests, setShowRequests] = useState<boolean>(false)
 
-    
-
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = () => {
             try {
                 fetch(`https://musclememory-backend.onrender.com/api/friends/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
                     setFriends(data)
+                    setIsLoading(false);
                 });
                 
                 fetch(`https://musclememory-backend.onrender.com/api/friends/requests/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
@@ -110,7 +111,8 @@ export default function LoggedIn() {
                 <h1>Friend Requests</h1>
                 <div className='friends-info'>
                         <ul className="friends-list">
-                        {friendRequests.map(([id, name]) =>
+                        { friendRequests.length === 0 ? <li className="friends-none">Nothing here yet. Guess your friends are still on their way!</li> :
+                            friendRequests.map(([id, name]) =>
                             <div key={id} className="friends-request-item">
                                 <li>{name}</li>
                                 <div className="friends-request-options">
@@ -135,7 +137,9 @@ export default function LoggedIn() {
                     </section>
                     <p className="friends-error">{error}</p>
                     <ul className="friends-list">
-                        {friends.length === 0 ? <li className="friends-list-item">No friends</li> : (
+                        { isLoading ? <span className="loading-bar"></span> :
+                            (
+                                friends.length === 0 ? <li className="friends-none">It’s a little quiet here now, but your amazing connections are just a step away!</li> : (
                             friends.map(([id, name]) => (
                                 <div key={id} className="friends-list-item">
                                     <li>{name}</li>
@@ -159,7 +163,7 @@ export default function LoggedIn() {
                                         </svg>
                                     </button>
                                 </div>
-                            )))}
+                            ))))}
                     </ul>
                 </div>
                 <button className='friends-tab-btn' onClick={() => setShowRequests(!showRequests)}>REQUESTS</button>

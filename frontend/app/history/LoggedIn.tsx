@@ -1,18 +1,19 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react"
-import { CompletedWorkout, ActiveExercise, Exercise } from "../components/interfaces"
+import { CompletedWorkout } from "../components/interfaces"
 
 export default function LoggedIn() {
     const [history, setHistory] = useState([] as CompletedWorkout[])
     const [selectedWorkout, setSelectedWorkout] = useState('')
-    const dateRef = useRef(new Date())
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         fetch(`https://musclememory-backend.onrender.com/api/completed_workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
             .then(res => res.json())
             .then(data => {
                 setHistory(data)
+                setIsLoading(false)
              })
             .catch(err => console.error(err))
     }, [])
@@ -29,7 +30,8 @@ export default function LoggedIn() {
         <div className="workout-history">
             <h1>History</h1>
             <ul className="workout-history-list">
-            { history.length === 0 && <p>No workouts completed yet</p> }
+                {isLoading ? <span className="loading-bar"></span> :
+                    ( history.length === 0 && <p className="empty-state">No workouts yet, but we know you’ve got this. Let’s make history!</p>) }
                 {history.map((workout: CompletedWorkout) => {
                     return (
                         <li key={workout._id} onClick={() => handleDescription(workout._id)} className={`workout-history-info ${selectedWorkout === workout._id ? 'scale-[1.02]' : ''}`}>
