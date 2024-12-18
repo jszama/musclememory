@@ -1,17 +1,29 @@
-'use client'
+'use client';
 
-import { CompletedWorkout } from "../components/interfaces"
-import React from "react";
-import { Suspense } from 'react'
+import { CompletedWorkout } from "../components/interfaces";
+import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Link  from "next/link";
+import Link from "next/link";
 
 export default function ReviewScreen() {
+    return (
+        <Suspense fallback={<div>Loading workout data...</div>}>
+            <ReviewContent />
+        </Suspense>
+    );
+}
+
+function ReviewContent() {
     const searchParams = useSearchParams();
 
     const completedWorkout = React.useMemo(() => {
         const workout = searchParams.get('workout');
-        return workout ? JSON.parse(workout) as CompletedWorkout : null;
+        try {
+            return workout ? (JSON.parse(workout) as CompletedWorkout) : null;
+        } catch (error) {
+            console.error("Invalid workout data:", error);
+            return null;
+        }
     }, [searchParams]);
 
     if (completedWorkout === null) {
@@ -19,12 +31,14 @@ export default function ReviewScreen() {
             <main className="start-home">
                 <section className="completed-workout">
                     <h1>Workout Not Found</h1>
-                    <Link href='/' className="start-btn-small mb-4">Continue</Link>
+                    <Link href="/" className="start-btn-small mb-4">
+                        Continue
+                    </Link>
                 </section>
             </main>
         );
     }
-    
+
     let totalVolume = 0;
     let musclesWorked: Set<string> = new Set();
 
@@ -33,8 +47,7 @@ export default function ReviewScreen() {
         musclesWorked.add(currMuscles)
         
         for (let j = 0; j < completedWorkout.exercises[i].sets.length; j++) {
-            //let unilateral = completedWorkout.exercises[i].unilateral; 
-            
+    
             totalVolume += completedWorkout.exercises[i].reps[j] * completedWorkout.exercises[i].weight[j];
         }
     }
