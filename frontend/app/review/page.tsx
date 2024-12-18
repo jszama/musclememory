@@ -30,9 +30,9 @@ export default function ReviewScreen() {
         musclesWorked.add(currMuscles)
         
         for (let j = 0; j < completedWorkout.exercises[i].sets.length; j++) {
-            let unilateral = completedWorkout.exercises[i].unilateral; 
+            //let unilateral = completedWorkout.exercises[i].unilateral; 
             
-            totalVolume += completedWorkout.exercises[i].reps[j] * completedWorkout.exercises[i].weight[j] * (unilateral ? 2: 1);
+            totalVolume += completedWorkout.exercises[i].reps[j] * completedWorkout.exercises[i].weight[j];
         }
     }
 
