@@ -7,9 +7,12 @@ import { useSearchParams } from "next/navigation";
 import Link  from "next/link";
 
 export default function ReviewScreen() {
-    const search = useSearchParams();
+    const searchParams = useSearchParams();
 
-    const completedWorkout = JSON.parse(search.get('workout') || '') as CompletedWorkout;
+    const completedWorkout = React.useMemo(() => {
+        const workout = searchParams.get('workout');
+        return workout ? JSON.parse(workout) as CompletedWorkout : null;
+    }, [searchParams]);
 
     if (completedWorkout === null) {
         return (
