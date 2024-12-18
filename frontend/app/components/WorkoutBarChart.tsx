@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const VolumeBarChart = ({ weeklyStats, monthlyStats }) => {
+type VolumeBarChartProps = {
+    weeklyStats: { [key: string]: { totalVolume: number, totalWorkouts: number } };
+    monthlyStats: { [key: string]: { totalVolume: number, totalWorkouts: number } };
+};
+
+const VolumeBarChart = ({ weeklyStats, monthlyStats }: VolumeBarChartProps) => {
     const [viewMode, setViewMode] = useState('weekly');
     const [chartType, setChartType] = useState('volume');
 

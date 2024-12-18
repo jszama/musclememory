@@ -11,7 +11,7 @@ export default function LoggedIn() {
     const [isGraphView, setIsGraphView] = useState(false)
 
     const stats = useRef<{
-        totalWorkouts: number; totalSets: number; totalReps: number; totalVolume: number; monthlyStats: { [key: string]: { totalSets: number; totalReps: number; totalVolume: number; }; }; weeklyStats: { [key: string]: { totalSets: number; totalReps: number; totalVolume: number; }; };
+        totalWorkouts: number; totalSets: number; totalReps: number; totalVolume: number; monthlyStats: { [key: string]: { totalSets: number; totalReps: number; totalVolume: number; totalWorkouts: number; }; }; weeklyStats: { [key: string]: { totalSets: number; totalReps: number; totalVolume: number; totalWorkouts: number; }; };
         volumePerMuscle: { [key: string]: number; };
         setsPerMuscle: { [key: string]: number; };
         repsPerMuscle: { [key: string]: number; };
