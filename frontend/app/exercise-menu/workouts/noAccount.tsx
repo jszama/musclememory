@@ -6,7 +6,7 @@ export default function NoAccount() {
     return (
         <div className='no-workouts'>
             <h1>To access this feature, please create an account. Your account will allow you to enjoy exclusive benefits and access our full range of services!</h1>
-            <button onClick={() => router.replace('/register')}>Create Account</button>
+            <button className="start-btn-small" onClick={() => router.replace('/register')}>Create Account</button>
         </div>
     )
 }

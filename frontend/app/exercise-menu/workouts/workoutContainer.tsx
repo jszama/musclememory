@@ -5,8 +5,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Workout } from '@/app/components/interfaces';
 import WorkoutList from './workoutList';
 import FirstWorkout from './firstWorkout';
+import { useRouter} from 'next/navigation';
 
 export default function WorkoutContainer() {
+    const router = useRouter();
+
     const [workouts, setWorkouts] = useState([] as Workout[]);
     const [isLoading, setIsLoading] = useState(true);
     const noWorkoutsRef = useRef(false);
@@ -31,9 +34,10 @@ export default function WorkoutContainer() {
 
     return (
         <>
-            {isLoading ? null : (
+            {isLoading ? <span className='loading-bar'></span> : (
                 noWorkoutsRef.current ? <FirstWorkout /> : <WorkoutList workoutsProp={workouts}/>
             )}
+            <button className='create-workout' onClick={() => router.replace('/exercise-menu/workouts/create')}>CREATE</button>
         </>
     )
 }

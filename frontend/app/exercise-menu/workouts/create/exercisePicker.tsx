@@ -115,7 +115,7 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
                             <div className="exercise-block" key={letter}>
                                 <h2>{letter}</h2>
                                 {exercises.map((exercise) => (
-                                    <div className={`exercise-card ${selectedExercise === exercise ? 'exercise-selected' : ''}`} key={exercise.name}>
+                                    <div className={`add-exercise-card ${selectedExercise === exercise ? 'exercise-selected' : ''}`} key={exercise.name}>
                                         <div className='flex flex-row justify-between w-full'>
                                             <h3 className='cursor-pointer'   onClick={() => handleDescription(exercise)}>{exercise.name}</h3>
 

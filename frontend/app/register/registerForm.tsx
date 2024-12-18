@@ -104,7 +104,7 @@ export default function RegisterPage() {
                 (e) => setConfirmPassword(e.target.value)
             } />
             
-            <p>{error}</p>
+            <p className='error'>{error}</p>
 
             <button type="submit">REGISTER</button>
         </form>

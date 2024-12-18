@@ -71,12 +71,12 @@ export default function LoginForm() {
             <input type='password' placeholder='Password' onChange={
                 (e) => setPassword(e.target.value.trim())
             } required />
-
-            <p className='error'>{error}</p>
             <div className='remember-me'>
                 <label htmlFor='remember'>Remember me</label>
                 <input className='m-2' type='checkbox' id='remember' onChange={(e) => setRemember(e.target.checked)} />
             </div>
+
+            <p className='error'>{error}</p>
             <button type="submit">CONTINUE</button>                
         </form>
     )

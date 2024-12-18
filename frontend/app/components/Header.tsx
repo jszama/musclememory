@@ -15,9 +15,9 @@ export default function Header() {
 
     return (
         <nav className="header">
-            <div className="hamburger-menu" onClick={toggleDropdown}>
+            <div className="hamburger-menu">
                 <div className='hamburger-icon'>
-                    <Image src={"/hamburger.png"} alt="hamburger-menu" width={64} height={64}/>
+                    <Image src={"/hamburger.png"} alt="hamburger-menu" width={64} height={64} onClick={toggleDropdown}/>
                 </div>
                 {showDropdown && (
                     <ul className="dropdown-menu">

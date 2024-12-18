@@ -37,7 +37,7 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
     return (
         <>
         <div className="create-workout-container">
-            <input className="workout-title-input" placeholder="Workout Name" />
+            <input className="workout-title-input" placeholder="Workout Name"/>
             <div className="create-workout-exercise-list ">
                 {exercisesPicked.map((exercise, index) => (
                     <div className='create-workout-exercise-card' key={index}>

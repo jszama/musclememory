@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { User } from '../components/interfaces'; 
 import checkLogin from '../components/functions/checkLogin';
-import { profile } from 'console';
 import Link from 'next/link';
 
 export default React.memo(function AccountPage() {
@@ -14,7 +13,6 @@ export default React.memo(function AccountPage() {
     const [changedBio, setChangedBio] = useState(false);
     const [error, setError] = useState('');
     const [profilePicture, setProfilePicture] = useState(''); 
-    const [friendCount, setFriendCount] = useState(0);
     const router = useRouter();
 
     useEffect(() => {
@@ -23,18 +21,12 @@ export default React.memo(function AccountPage() {
                 const token = document.cookie.split(';')[1]?.split('=')[1];
                 if (!token) throw new Error('No token found');
     
-                const [userResponse, friendsResponse, s3Response] = await Promise.all([
+                const [userResponse, s3Response] = await Promise.all([
                     fetch('https://musclememory-backend.onrender.com/api/user/profile', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
-                        },
-                    }),
-                    fetch(`https://musclememory-backend.onrender.com/api/friends/${document.cookie.split(';')[0].split('=')[1]}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
                         },
                     }),
                     fetch(`https://musclememory-profilepictures.s3.amazonaws.com/${document.cookie.split(';')[0].split('=')[1]}?v=${Date.now()}`, {
@@ -50,9 +42,6 @@ export default React.memo(function AccountPage() {
                 if (!userResponse.ok) throw new Error('Failed to fetch user profile');
                 const userData = await userResponse.json();
     
-                if (!friendsResponse.ok) throw new Error('Failed to fetch friends count');
-                const friendsData = await friendsResponse.json();
-    
                 let profilePictureUrl = '';
                 if (s3Response.ok) {
                     const s3Data = await s3Response.blob();
@@ -60,7 +49,6 @@ export default React.memo(function AccountPage() {
                     setProfilePicture(profilePictureUrl);
                 }
                 setUser(userData);
-                setFriendCount((prevCount) => prevCount !== friendsData.length ? friendsData : prevCount);
             } catch (e: any) {
                 setError(e.message || 'An error occurred');
             }
@@ -156,55 +144,63 @@ export default React.memo(function AccountPage() {
     return (
         <main className='account-page'>
             <div className='account-info'>
-                        <section className='account-top-section'>
-                            <div className='account-details'>
+                <section className='account-top-section'>
+                    <div className='account-details'>
+                        {user.name ? (
+                            <>
                                 <h1 className='account-info-title'><span>{user.name}</span>, looking good!</h1>
                                 <p className='account-info-email'>{user.email}</p>
-                                <div className='account-bio-box'>
-                                    {isEditing ? (
-                                        <textarea
-                                            className='account-bio'
-                                            value={user.bio}
-                                            onChange={handleBioChange}
-                                            autoFocus
-                                            style={{ resize: 'vertical' }}
-                                        />
-                                    ) : (
-                                        <p className='account-bio'>{user.bio}</p>
-                                    )}
-                                </div>
-                                <div>
-                                    <button className='account-edit-bio-btn' onClick={handleEditButton}>EDIT BIO</button>
-                                    <p className='account-error-text'>{error}</p>
-                                </div>
-                            </div>
-                            <div className='account-profile-picture-box'>
-                                <Image
-                                    className='account-profile-picture'
-                                    src={profilePicture || '/profile.png'}
-                                    alt="Profile Picture"
-                                    height={256}
-                                    width={256}
+                            </>
+                        ) : (
+                            <>
+                                <span className='loading-bar'></span>  
+                            </>    
+                        )}
+                        
+                        <div className='account-bio-box'>
+                            {isEditing ? (
+                                <textarea
+                                    className='account-bio'
+                                    value={user.bio}
+                                    onChange={handleBioChange}
+                                    autoFocus
                                 />
-                                <div className='upload-overlay'>
-                                    <input id='profile-picture-upload' type='file' accept='image/*' onChange={handleImageUpload} />
-                                </div>
-                            </div>
-                        </section>
-                        <section className='account-bottom-section'>
-                        <div className='account-info-btn-box'>
-                            <Link className='app-btn' href='/friends'>
-                                <Image src="/friends.png" alt="Friends" width={96} height={96}/>
-                            </Link>                            
-                            <Link className='app-btn' href='/stats'>
-                                <Image src="/statistics.png" alt="Statistics" width={72} height={72}/>
-                            </Link>
+                            ) : (
+                                <p className='account-bio'>{user.bio}</p>
+                            )}
                         </div>
-                        <button className='account-info-logout-btn' onClick={() => {
-                        document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                        document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-                        localStorage.removeItem('user');
-                        localStorage.removeItem('token');
+                        <div>
+                            <button className='account-edit-bio-btn' onClick={handleEditButton}>EDIT BIO</button>
+                            <p className='account-error-text'>{error}</p>
+                        </div>
+                    </div>
+                    <div className='account-profile-picture-box'>
+                        <Image
+                            className='account-profile-picture'
+                            src={profilePicture || '/profile.png'}
+                            alt="Profile Picture"
+                            height={256}
+                            width={256}
+                        />
+                        <div className='upload-overlay'>
+                            <input id='profile-picture-upload' type='file' accept='image/*' onChange={handleImageUpload} />
+                        </div>
+                    </div>
+                </section>
+                <section className='account-bottom-section'>
+                    <div className='account-info-btn-box'>
+                        <Link className='app-btn' href='/friends'>
+                            <Image src="/friends.png" alt="Friends" width={96} height={96}/>
+                        </Link>                            
+                        <Link className='app-btn' href='/stats'>
+                            <Image src="/statistics.png" alt="Statistics" width={72} height={72}/>
+                        </Link>
+                    </div>
+                    <button className='account-info-logout-btn' onClick={() => {
+                    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('token');
                         router.replace('/login');
                     }}>LOGOUT</button>
                 </section>

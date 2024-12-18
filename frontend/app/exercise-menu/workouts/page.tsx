@@ -24,7 +24,7 @@ export default function Workouts() {
     return (
         <main className="home-page">
             <div className="exercise-container">
-                {isLoading ? <p className='text-6'>Loading...</p> : displayMenu}
+                {isLoading ? null : displayMenu}
             </div>
         </main>
     );

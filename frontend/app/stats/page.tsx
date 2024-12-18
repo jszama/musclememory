@@ -6,14 +6,16 @@ import LoggedIn from './LoggedIn';
 
 export default function Page() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() =>
-        setIsLoggedIn(document?.cookie.includes('token'))
-    , []);
+    useEffect(() => {
+        setIsLoggedIn(document?.cookie.includes('token'));
+        setIsLoading(false);
+    }, []);
 
     return (
         <main className='start-home items-center justify-normal pt-32'>
-            {isLoggedIn ? <LoggedIn /> : <Guest />}
+            { !isLoading ? (isLoggedIn ? <LoggedIn /> : <Guest />) : '' }
         </main>
     )
 }

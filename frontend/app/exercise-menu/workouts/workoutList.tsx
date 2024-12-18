@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { Workout, Exercise } from '../../components/interfaces';
 
-import { useRouter } from 'next/navigation';
-
 export default function WorkoutList({ workoutsProp }: { workoutsProp: Workout[] }) {
     const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
-    const router = useRouter();
     
     const handleDescription = (workout: Workout) => {
         if (selectedWorkout === workout) {
@@ -61,7 +58,6 @@ export default function WorkoutList({ workoutsProp }: { workoutsProp: Workout[] 
                     {workoutList()}
                 </section>
         </section>
-        <button className='create-workout' onClick={() => router.replace('/exercise-menu/workouts/create')}>CREATE</button>
         </>
     );
 }
