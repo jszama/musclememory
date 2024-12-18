@@ -38,6 +38,7 @@ const config: Config = {
         'green-500': "#136C16",
         'green-400': "#367C39",
         'green-300': "#4CAF50",
+        'green-250': "#86E386",
         'green-200': "#71C174",
         'green-100': "#A3F5A6",
   
