@@ -1,32 +1,31 @@
-const AWS = require('aws-sdk');
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+const s3Client = new S3Client({
   region: process.env.AWS_REGION,
-  signatureVersion: 'v4'
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
 });
 
-const s3 = new AWS.S3();
-
-const uploadFile = (fileBuffer, user_id) => {
+const uploadFile = async (fileBuffer, user_id) => {
   const params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Key: user_id.toString(),
     Body: fileBuffer,
-    ContentType: 'image/jpeg',
-    ACL: 'public-read'
+    ContentType: "image/jpeg",
+    ACL: "public-read", 
   };
-  return new Promise((resolve, reject) => {
-    s3.upload(params, (err, data) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(data.Location);
-    });
-  });
+
+  try {
+    const command = new PutObjectCommand(params);
+    const response = await s3Client.send(command);
+    return `https://${params.Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`;
+  } catch (error) {
+    throw new Error(`File upload failed: ${error.message}`);
+  }
 };
 
 module.exports = { uploadFile };
