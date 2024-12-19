@@ -14,7 +14,7 @@ export default function Page() {
     }, []);
 
     return (
-        <main className='start-home items-center justify-normal pt-32'>
+        <main className='start-home items-center justify-normal pt-24'>
             { !isLoading ? (isLoggedIn ? <LoggedIn /> : <Guest />) : '' }
         </main>
     )
