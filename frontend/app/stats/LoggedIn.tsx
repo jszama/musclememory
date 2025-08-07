@@ -5,6 +5,7 @@ import Link from "next/link"
 import processStats from "../components/functions/processStats"
 import VolumeBarChart from "../components/WorkoutBarChart"
 import MuscleDistributionGraph from "../components/MuslceDistributionGraph"
+import { getUserIdFromCookie } from "../utils/cookieUtils"
 
 export default function LoggedIn() {
     const [isLoading, setIsLoading] = useState(true)
@@ -18,13 +19,16 @@ export default function LoggedIn() {
     } | null>(null)
 
     useEffect(() => {
-        fetch(`https://musclememory-backend.onrender.com/api/completed_workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
-            .then(res => res.json())
-            .then(data => {
-                stats.current = processStats(data)
-                setIsLoading(false)
-            })
-            .catch(err => console.error(err))
+        const userId = getUserIdFromCookie();
+        if (userId) {
+            fetch(`https://musclememory-backend.onrender.com/api/completed_workouts/all/${userId}`)
+                .then(res => res.json())
+                .then(data => {
+                    stats.current = processStats(data)
+                    setIsLoading(false)
+                })
+                .catch(err => console.error(err))
+        }
     }, [])
 
     return (

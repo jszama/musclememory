@@ -6,6 +6,7 @@ import { Workout } from '@/app/components/interfaces';
 import WorkoutList from './workoutList';
 import FirstWorkout from './firstWorkout';
 import { useRouter} from 'next/navigation';
+import { getUserIdFromCookie } from '@/app/utils/cookieUtils';
 
 export default function WorkoutContainer() {
     const router = useRouter();
@@ -15,8 +16,11 @@ export default function WorkoutContainer() {
     const noWorkoutsRef = useRef(false);
 
     useEffect(() => { 
+        const userId = getUserIdFromCookie();
+        if (!userId) return;
+
         let noWorkouts = false;
-        fetch(`https://musclememory-backend.onrender.com/api/workouts/all/${document.cookie.split(';')[0].split('=')[1]}`, {
+        fetch(`https://musclememory-backend.onrender.com/api/workouts/all/${userId}`, {
             mode: 'cors',
         })
             .then(response => response.json())

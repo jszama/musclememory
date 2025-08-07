@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import LoggedIn from './LoggedIn';
 import Guest from './Guest';
+import { isUserLoggedIn } from '../utils/cookieUtils';
 
 export default function Start() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -10,9 +11,11 @@ export default function Start() {
 
     useEffect(() => {
         setIsLoading(false);
-        setIsLoggedIn(document?.cookie.includes('token'));
+        if (typeof window !== 'undefined') {
+            setIsLoggedIn(isUserLoggedIn());
+        }
     }
-    , [setIsLoading, isLoggedIn])
+    , []);
     
     return (
         <main className='start-home'>

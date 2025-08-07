@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Workout } from '../components/interfaces';
+import { getUserIdFromCookie } from '../utils/cookieUtils';
 
 interface WorkoutPickerProps {
     pickedWorkout: Workout[],
@@ -10,10 +11,13 @@ export default function WorkoutPicker({ pickedWorkout, setPickedWorkout }: Worko
     const [workouts, setWorkouts] = useState([] as Workout[])
     
     useEffect(() => {
-        fetch(`https://musclememory-backend.onrender.com/api/workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
-            .then(res => res.json())
-            .then(data => setWorkouts(data))
-            .catch(err => console.error(err))
+        const userId = getUserIdFromCookie();
+        if (userId) {
+            fetch(`https://musclememory-backend.onrender.com/api/workouts/all/${userId}`)
+                .then(res => res.json())
+                .then(data => setWorkouts(data))
+                .catch(err => console.error(err))
+        }
     }, [])
     
     const submitWorkout = () => {

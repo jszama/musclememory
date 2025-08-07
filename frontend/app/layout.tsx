@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import BackButton from "./components/BackButton";
 
 // import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: "MuscleMemory",
@@ -34,7 +35,8 @@ export default function RootLayout({
         <body className={roboto.className}>
           <Header/>
           {children}
-          <BackButton/>
+          <BackButton />
+          <Toaster/>
         </body>
       </html>
     </>

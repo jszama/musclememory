@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { CompletedWorkout } from "../components/interfaces"
+import { getUserIdFromCookie } from "../utils/cookieUtils"
 
 export default function LoggedIn() {
     const [history, setHistory] = useState([] as CompletedWorkout[])
@@ -9,13 +10,16 @@ export default function LoggedIn() {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`https://musclememory-backend.onrender.com/api/completed_workouts/all/${document.cookie.split(';')[0].split('=')[1]}`)
-            .then(res => res.json())
-            .then(data => {
-                setHistory(data)
-                setIsLoading(false)
-             })
-            .catch(err => console.error(err))
+        const userId = getUserIdFromCookie();
+        if (userId) {
+            fetch(`https://musclememory-backend.onrender.com/api/completed_workouts/all/${userId}`)
+                .then(res => res.json())
+                .then(data => {
+                    setHistory(data)
+                    setIsLoading(false)
+                 })
+                .catch(err => console.error(err))
+        }
     }, [])
 
     const handleDescription = (id: string) => {

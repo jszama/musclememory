@@ -1,6 +1,7 @@
 import { Exercise } from "@/app/components/interfaces";
 import { Dispatch, SetStateAction, use, useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
+import { getUserIdFromCookie, validateAuthData } from "@/app/utils/cookieUtils";
 
 interface WorkoutCreatorProps {
     exercisesPicked: Exercise[];
@@ -14,6 +15,14 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
 
     const CreateWorkout = () => {
         const workoutTitleInput = document.querySelector('.workout-title-input') as HTMLInputElement;
+        
+        // Validate authentication data first
+        if (!validateAuthData()) {
+            console.error('Invalid authentication data, cannot create workout');
+            return;
+        }
+        
+        const userId = getUserIdFromCookie();
 
         fetch('https://musclememory-backend.onrender.com/api/workouts/create', {
             method: 'POST',
@@ -21,7 +30,7 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                user: document.cookie.split(';')[0].split('=')[1], 
+                user: userId,
                 name: (workoutTitleInput?.value || 'Unnamed Workout'),
                 exercises: exercisesPicked,
             }),

@@ -3,6 +3,7 @@ import { Workout, Exercise, CompletedWorkout, ActiveExercise } from '../componen
 import ExercisePicker from './exercisePicker';
 import ExerciseScreen from './exerciseScreen';
 import { useRouter } from 'next/navigation';
+import { getUserIdFromCookie } from '../utils/cookieUtils';
 
 interface WorkoutPickerProps {
     pickedWorkout: Workout[];
@@ -13,7 +14,12 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
     const router = useRouter();
     const selectedWorkout = pickedWorkout[0] as Workout;
 
-    const user_id = document?.cookie.split(';')[0].split('=')[1];
+    const [userId, setUserId] = useState<string>('');
+
+    useEffect(() => {
+        const userIdFromCookie = getUserIdFromCookie();
+        setUserId(userIdFromCookie);
+    }, []);
 
     const [addExercise, setAddExercise] = useState(false);
     const [showButton, setShowButton] = useState(true);
@@ -28,7 +34,8 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
             exercise: exercise,
             sets: [1],
             reps: [0],
-            weight: [0]
+            weight: [0],
+            unilateral: false
         };
     }));
 
@@ -93,8 +100,8 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
     return (
         <div className="start-workout-container">
             <div className="top-row">
-                <h1 className="absolute text-bold">{selectedWorkout.name}</h1>
-                <button onClick={() => router.replace('/')} className="remove-exercise ml-auto mr-2">
+                <h1 className="absolute font-bold">{selectedWorkout.name}</h1>
+                <button onClick={() => router.replace('/')} className="remove-exercise ml-auto mr-5">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="15" y1="9" x2="9" y2="15" />
                         <line x1="9" y1="9" x2="15" y2="15" />
@@ -163,9 +170,9 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
                 className="finish-workout-button"
                 onClick={async () => {
                     const completed = {
-                        user_id: user_id,
+                        user_id: userId,
                         name: selectedWorkout.name,
-                        exercises: activeExercises
+                        exercises: activeExercises,
                     } as CompletedWorkout;
 
                     if (loggedIn) {
@@ -187,7 +194,7 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
                     }
                 }}
             >
-                FINISH
+                Finish
                 </button>
         </div>
     );

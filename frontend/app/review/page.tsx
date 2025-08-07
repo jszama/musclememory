@@ -77,9 +77,6 @@ function ReviewContent() {
                                         <h3>{ muscleGroup }</h3>
                                     </li>
                                 ))}
-                                 <li key={3}>
-                                        <h3>ass</h3>
-                                    </li>
                             </ol>
                         </section>
                     </section>

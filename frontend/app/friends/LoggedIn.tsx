@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react"
+import { getUserIdFromCookie } from "../utils/cookieUtils"
 
 export default function LoggedIn() {
     const [friends, setFriends] = useState<Array<[string, string]>>([])
@@ -14,17 +15,20 @@ export default function LoggedIn() {
 
     useEffect(() => {
         const fetchData = () => {
-            try {
-                fetch(`https://musclememory-backend.onrender.com/api/friends/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
-                    setFriends(data)
-                    setIsLoading(false);
-                });
-                
-                fetch(`https://musclememory-backend.onrender.com/api/friends/requests/${document.cookie.split(';')[0].split('=')[1]}`).then(response => response.json()).then(data => {
-                    setFriendRequests(data)
-                });
-            } catch (err) {
-                console.error(err);
+            const userId = getUserIdFromCookie();
+            if (userId) {
+                try {
+                    fetch(`https://musclememory-backend.onrender.com/api/friends/${userId}`).then(response => response.json()).then(data => {
+                        setFriends(data)
+                        setIsLoading(false);
+                    });
+                    
+                    fetch(`https://musclememory-backend.onrender.com/api/friends/requests/${userId}`).then(response => response.json()).then(data => {
+                        setFriendRequests(data)
+                    });
+                } catch (err) {
+                    console.error(err);
+                }
             }
         };
     
@@ -34,6 +38,12 @@ export default function LoggedIn() {
     const sendRequest = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         
+        const userId = getUserIdFromCookie();
+        if (!userId) {
+            setError('Please log in to send friend requests');
+            return;
+        }
+        
         try {
             const res = await fetch(`https://musclememory-backend.onrender.com/api/friends/add`, {
                 method: 'POST',
@@ -41,7 +51,7 @@ export default function LoggedIn() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    user: document.cookie.split(';')[0].split('=')[1],
+                    user: userId,
                     friend: query
                 })
             });
@@ -60,13 +70,16 @@ export default function LoggedIn() {
     
 
     const acceptRequest = (requestSender: string) => {
+        const userId = getUserIdFromCookie();
+        if (!userId) return;
+
         fetch(`https://musclememory-backend.onrender.com/api/friends/accept`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user: document.cookie.split(';')[0].split('=')[1],
+                user: userId,
                 friend: requestSender
             })
         })
@@ -83,13 +96,16 @@ export default function LoggedIn() {
     }
 
     const declineRequest = (requestSender: string) => {
+        const userId = getUserIdFromCookie();
+        if (!userId) return;
+
         fetch(`https://musclememory-backend.onrender.com/api/friends/accept`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user: document.cookie.split(';')[0].split('=')[1],
+                user: userId,
                 friend: requestSender
             })
         })

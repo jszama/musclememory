@@ -4,13 +4,16 @@ import React, {useEffect, useState} from 'react';
 
 import NoAccount from './noAccount';
 import WorkoutContainer from './workoutContainer';
+import { isUserLoggedIn } from '../../utils/cookieUtils';
 
 export default function Workouts() {
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setIsSignedIn(document.cookie.includes('token'));
+        if (typeof window !== 'undefined') {
+            setIsSignedIn(isUserLoggedIn());
+        }
         setIsLoading(false);
     }, []);
 

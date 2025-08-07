@@ -3,19 +3,36 @@
 import Image from 'next/image'; 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { isUserLoggedIn, setCookie } from './utils/cookieUtils';
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() =>
-    setIsLoggedIn(document?.cookie.includes('token'))
-  , []);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsLoggedIn(isUserLoggedIn());
+    }
+  }, []);
   
-  if (!isLoggedIn && typeof window !== 'undefined' && localStorage.getItem('token')) {
-    document.cookie = `user=${localStorage.getItem('user')}`;
-    document.cookie = `token=${localStorage.getItem('token')}`;
-    setIsLoggedIn(true);
-  }
+  useEffect(() => {
+    if (!isLoggedIn && typeof window !== 'undefined' && localStorage.getItem('token')) {
+      const storedUser = localStorage.getItem('user');
+      const storedToken = localStorage.getItem('token');
+      
+      if (storedUser && storedToken) {
+        // Validate user ID format before setting cookie
+        if (/^[0-9a-fA-F]{24}$/.test(storedUser)) {
+          setCookie('user', storedUser);
+          setCookie('token', storedToken);
+          setIsLoggedIn(true);
+        } else {
+          console.error('Invalid user ID in localStorage, clearing storage');
+          localStorage.removeItem('user');
+          localStorage.removeItem('token');
+        }
+      }
+    }
+  }, [isLoggedIn]);
 
   return (
     <main className="home-page ">

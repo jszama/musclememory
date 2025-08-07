@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 import checkLogin from '../components/functions/checkLogin'
+import { setCookie } from '../utils/cookieUtils';
 
 export default function LoginForm() {
     const [email, setEmail] = useState('')
@@ -38,8 +39,8 @@ export default function LoginForm() {
         if (!data || !data.user || !data.user.token) {
             throw new Error('Invalid email or password');
         }
-        document.cookie = `user=${data.user._id}`;
-        document.cookie = `token=${data.user.token}`;
+        setCookie('user', data.user._id);
+        setCookie('token', data.user.token);
 
         if (remember) {
             localStorage.setItem('user', data.user._id);

@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
 import checkLogin from '../components/functions/checkLogin';
+import toast from 'react-hot-toast';
+import { setCookie } from '../utils/cookieUtils';
 
 export default function RegisterPage() {
     const [name, setName] = useState('');
@@ -12,6 +14,7 @@ export default function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if (checkLogin()) {
@@ -52,21 +55,31 @@ export default function RegisterPage() {
     }
 
     const registerUser = async (name: string, email: string, password: string) => {
-        const response = await fetch('https://musclememory-backend.onrender.com/api/user/register', {
+        try {
+            setLoading(true);
+            const response = await fetch(`https://musclememory-backend.onrender.com/api/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ name, email, password })
-        });
+            })
 
-        if (!response.ok) {
-            throw new Error(response.statusText);
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            const data = await response.json();
+            toast.success(data.message);
+            setCookie('user', data.user._id);
+            setCookie('token', data.user.token);
+
+            router.replace('/');
+        } catch (error: any) {
+            toast.error(error.message || 'An error occurred');
+            setLoading(false);
         }
-
-        const data = await response.json();
-        document.cookie = `user=${data.user._id                 }`;
-        document.cookie = `token=${data.user.token}`;
     }
 
     const register = async (name: string, email: string, password: string, confirmPassword: string) => {
@@ -74,18 +87,12 @@ export default function RegisterPage() {
         
         await registerUser(name, email, password);
 
-        setError('Account created successfully!');
-        setTimeout(() => {}, 750);
-        router.replace('/');
+        setLoading(false);
     }
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try {
-            await register(name, email, password, confirmPassword);
-        } catch (error) {
-            setError((error as Error).message);
-        }
+        register(name, email, password, confirmPassword);
     }
 
     return (
@@ -106,7 +113,8 @@ export default function RegisterPage() {
             
             <p className='error'>{error}</p>
 
-            <button type="submit">REGISTER</button>
+            {/* Ternary operator to show loading state */}
+            <button type="submit" disabled={loading} className={`${loading} ? 'cursor-now-allowed': 'cursor-pointer'`}>{loading ? 'Loading...' : 'Register'}</button>
         </form>
     )
 }

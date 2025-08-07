@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { User } from '../components/interfaces'; 
 import checkLogin from '../components/functions/checkLogin';
 import Link from 'next/link';
+import { getUserIdFromCookie, deleteCookie, getTokenFromCookie, debugCookies, validateAuthData } from '../utils/cookieUtils';
 
 export default React.memo(function AccountPage() {
     const [user, setUser] = useState({} as User);
@@ -18,8 +19,18 @@ export default React.memo(function AccountPage() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const token = document.cookie.split(';')[1]?.split('=')[1];
-                if (!token) throw new Error('No token found');
+                // Debug cookies first
+                console.log('=== Debug Cookie Information ===');
+                debugCookies();
+                
+                // Validate authentication data
+                if (!validateAuthData()) {
+                    router.replace('/login');
+                    return;
+                }
+                
+                const token = getTokenFromCookie();
+                const userId = getUserIdFromCookie();
     
                 const [userResponse, s3Response] = await Promise.all([
                     fetch('https://musclememory-backend.onrender.com/api/user/profile', {
@@ -29,7 +40,7 @@ export default React.memo(function AccountPage() {
                             'Authorization': `Bearer ${token}`
                         },
                     }),
-                    fetch(`https://musclememory-profilepictures.s3.amazonaws.com/${document.cookie.split(';')[0].split('=')[1]}?v=${Date.now()}`, {
+                    fetch(`https://musclememory-profilepictures.s3.amazonaws.com/${userId}?v=${Date.now()}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -77,7 +88,11 @@ export default React.memo(function AccountPage() {
     const handleEditButton = async () => {
         if (isEditing && changedBio) {
             try {
-                const token = document.cookie.split(';')[1].split('=')[1]
+                const token = getTokenFromCookie();
+                const userId = getUserIdFromCookie();
+
+                if (!token) throw new Error('No token found');
+                if (!userId) throw new Error('No user ID found');
 
                 const response = await fetch('https://musclememory-backend.onrender.com/api/user/profile', {
                     method: 'PUT',
@@ -85,7 +100,7 @@ export default React.memo(function AccountPage() {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({ token: document.cookie.split(';')[0].split('=')[1], bio: user.bio })
+                    body: JSON.stringify({ token: userId, bio: user.bio })
                 });
 
                 if (!response.ok) throw new Error('Failed to update bio');
@@ -119,9 +134,9 @@ export default React.memo(function AccountPage() {
         formData.append('profilePic', file);
     
         try {
-            const token = document.cookie.split(';')[1]?.split('=')[1];
+            const token = getTokenFromCookie();
             if (!token) throw new Error('No token found.');
-    
+
             const response = await fetch('https://musclememory-backend.onrender.com/api/user/profile', {
                 method: 'PUT',
                 headers: {
@@ -197,10 +212,10 @@ export default React.memo(function AccountPage() {
                         </Link>
                     </div>
                     <button className='account-info-logout-btn' onClick={() => {
-                    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-                    localStorage.removeItem('user');
-                    localStorage.removeItem('token');
+                        deleteCookie('user');
+                        deleteCookie('token');
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('token');
                         router.replace('/login');
                     }}>LOGOUT</button>
                 </section>

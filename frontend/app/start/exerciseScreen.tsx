@@ -11,6 +11,8 @@ export default function ExerciseScreen({ exercise, onUpdateExercise }: ExerciseS
     const [reps, setReps] = useState([...exercise.reps]);
     const [weight, setWeight] = useState([...exercise.weight]);
 
+    //const canUnilateral = exercise.exercise.resistance === 'Bodyweight' || exercise.exercise.resistance === 'Cable' || exercise.exercise.resistance === 'Machine' || exercise.exercise.resistance === 'Dumbbell';
+
     useEffect(() => {
         const updatedExercise = { ...exercise, sets, reps, weight };
         onUpdateExercise(updatedExercise);
@@ -18,8 +20,8 @@ export default function ExerciseScreen({ exercise, onUpdateExercise }: ExerciseS
 
     const addSet = () => {
         setSets(prevSets => [...prevSets, prevSets.length + 1]);
-        setReps(prevReps => [...prevReps, 0]);
-        setWeight(prevWeight => [...prevWeight, 0]);
+        setReps(prevReps => [...prevReps, prevReps[prevReps.length - 1]]);
+        setWeight(prevWeight => [...prevWeight, prevWeight[prevWeight.length - 1]]);
     }
 
     const removeSet = () => {
@@ -33,7 +35,7 @@ export default function ExerciseScreen({ exercise, onUpdateExercise }: ExerciseS
     const handleRepsChange = (index: number, value: number) => {
         setReps(prevReps => {
             const updatedReps = [...prevReps];
-            updatedReps[index] = value;
+            updatedReps[index] = Math.floor(value);
             return updatedReps;
         });
     };
@@ -48,30 +50,46 @@ export default function ExerciseScreen({ exercise, onUpdateExercise }: ExerciseS
 
     return (
         <div className='exercise-body'>
-            <h2 className='text-center'> {exercise.exercise.name} </h2>
+            <section className='exercise-info-header'>
+                <h2 className='text-center'> {exercise.exercise.name} </h2>
+            </section>
             <div className='exercise-info-container'>
+                <div className='exercise-header'>
+                    <section className='set-display'>
+                        <h3>Set</h3>
+                    </section>
+                    <div className='set-input'>
+                        <section className='set-section'>
+                            <p>Reps</p>
+                        </section>
+                        <section className='set-section'>
+                            <p>Weight</p>
+                        </section>
+                    </div>
+                </div>
                 {sets.map((_, index) => (
-                    <div className='exercise-header' key={index}>
-                        <section>
-                            <h3>Set</h3>
+                    <div className='exercise-stats' key={index}>
+                        <section className='set-display'>
                             <p>{index + 1}</p>
                         </section>
                         <div className='set-input'>
                             <section className='set-section'>
-                                <p>Reps</p>
                                 <input
                                     type="number"
                                     value={reps[index] || ''}
-                                    onChange={(event) => handleRepsChange(index, Number(event.target.value))}
+                                    step="1"
+                                    min="0"
+                                    onChange={(event) => handleRepsChange(index, Math.max(0, Number(event.target.value)))}
                                 />
                             </section>
                             <section className='set-section'>
-                                <p>Weight</p>
                                 <div className='flex flex-row gap-x-1 text-3'>
                                     <input
                                         type="number"
                                         value={weight[index] || ''}
-                                        onChange={(event) => handleWeightChange(index, Number(event.target.value))}
+                                        step="0.01"
+                                        min="0"
+                                        onChange={(event) => handleWeightChange(index, Math.max(0, Number(event.target.value)))}
                                     /> kg
                                 </div>
                             </section>
