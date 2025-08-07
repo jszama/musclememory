@@ -18,7 +18,14 @@
 
 body {
   @apply bg-white;
-    font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @layer base {
@@ -55,35 +62,35 @@ body {
  }
 
   .text-11 {
-    font-size: 72px;
+    font-size: clamp(48px, 8vw, 72px);
   }
 
   .text-10 {
-    font-size: 60px;
+    font-size: clamp(42px, 7vw, 60px);
   }
 
   .text-9 {
-    font-size: 48px;
+    font-size: clamp(36px, 6vw, 48px);
   }
 
   .text-8 {
-    font-size: 36px;
+    font-size: clamp(28px, 5vw, 36px);
   }
 
   .text-7 {
-    font-size: 30px;
+    font-size: clamp(24px, 4vw, 30px);
   }
 
   .text-6 {
-    font-size: 24px;
+    font-size: clamp(20px, 3.5vw, 24px);
   }
 
   .text-5 {
-    font-size: 20px;
+    font-size: clamp(18px, 3vw, 20px);
   }
 
   .text-4 {
-    font-size: 18px;
+    font-size: clamp(16px, 2.5vw, 18px);
   }
 
   .text-3 {
@@ -115,8 +122,61 @@ body {
   }
 
   .text-bold {
-    font-weight: 500
- }
+    font-weight: 500;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .container-sm {
+    @apply max-w-3xl mx-auto px-4;
+  }
+
+  /* Responsive utilities */
+  @media (max-width: 768px) {
+    .mobile-text {
+      font-size: 14px;
+    }
+    
+    .mobile-padding {
+      padding: 0.5rem;
+    }
+    
+    .mobile-full-width {
+      width: 100%;
+    }
+  }
+
+  /* Improved focus states */
+  button:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid #7B68EE;
+    outline-offset: 2px;
+  }
+
+  /* Smooth transitions */
+  * {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
 
 
 }
@@ -329,7 +389,7 @@ body {
   }
 
   .account-info {
-    @apply flex flex-col justify-between h-[50%] w-[40%] bg-primary-300 p-4 rounded-[15px] shadow-1 gap-y-2;
+    @apply flex flex-col justify-between h-[60%] w-[40%] bg-primary-300 p-4 rounded-[15px] shadow-1 gap-y-2;
   }
 
   .account-details {
@@ -1123,55 +1183,125 @@ body {
 
   /* Workout Review */
   .review-container {
-    @apply flex flex-col justify-normal items-center h-[90%] w-[50%] bg-primary-400 text-5 text-white gap-y-2 rounded-[15px] shadow-3 p-2;
+    @apply flex flex-col justify-normal items-center h-[90%] w-[50%] bg-white text-5 text-gray-800 gap-y-2 rounded-lg shadow-lg p-3 border border-gray-200;
   }
 
   .review-container h1 {
-    @apply text-8 text-bold;
+    @apply text-7 text-bold text-primary-600 border-b-2 border-primary-200 pb-1 mb-1;
   }
 
   .review-data-section {
-    @apply max-h-[23%] w-[90%] flex flex-row justify-around items-center;
+    @apply max-h-[20%] w-[95%] flex flex-row justify-around items-center bg-gray-50 rounded-lg p-2 shadow-inner;
   }
 
   .review-data-section .stats-boxes {
-    @apply h-[80%] justify-around w-[50%];
+    @apply h-[100%] justify-center items-center flex flex-row gap-x-2 w-[50%];
   }   
 
   .review-data-section .stats-box {
-    @apply w-[35%]
+    @apply w-[30%] h-[75%] bg-white border border-gray-300 rounded-md shadow-sm p-2 flex flex-col items-center justify-center overflow-hidden;
+  }
+
+  .review-data-section .stats-box .stats-value {
+    @apply text-4 text-bold text-primary-600 leading-tight;
+  }
+
+  .review-data-section .stats-box .stats-label {
+    @apply text-1 text-gray-600 text-center leading-tight mt-1;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 
   .muscles-worked-container {
-    @apply flex flex-col w-[40%] h-[100%] bg-primary-300 rounded-[5px] shadow-2 p-2;
+    @apply flex flex-col w-[40%] h-[100%] bg-white rounded-lg shadow-md p-2 border border-gray-200;
+  }
+
+  .muscles-worked-container h3 {
+    @apply text-4 text-bold text-primary-600 mb-2 border-b-2 border-primary-200 pb-1;
   }
 
   .muscles-worked-list {
-    @apply flex flex-col gap-y-2 overflow-auto bg-primary-400 rounded-[5px] shadow-2 p-2 h-full;
+    @apply flex flex-col gap-y-1 overflow-auto bg-transparent  p-2 h-full border border-gray-100;
   }
 
   .muscles-worked-list h3 {
-    @apply text-3 text-bold border-b-2 border-b-gray-200;
+    @apply text-2 text-bold text-gray-700 border-b-2 border-gray-300 pb-1 mb-1;
+  }
+
+  .muscles-worked-list li {
+    @apply text-1 text-gray-600 py-1 px-2 bg-white rounded border-l-2;
   }
 
   .review-exercises {
-    @apply flex flex-col bg-primary-300 w-[85%] min-h-[55%] max-h-[55%] p-2 rounded-[5px] mx-4 shadow-2 my-2;
+    @apply flex flex-col bg-white w-[85%] min-h-[55%] max-h-[55%] p-3 rounded-lg mx-4 shadow-lg my-2 border border-gray-300 relative;
+  }
+
+  .review-exercises h2 {
+    @apply text-5 text-bold text-primary-600 mb-2 border-b-2 border-primary-200 pb-1;
   }
 
   .completed-exercises-list {
-    @apply flex flex-col gap-y-1 overflow-auto bg-primary-400 rounded-[5px] shadow-2 p-2 h-full;
+    @apply flex flex-col gap-y-2 overflow-auto bg-gray-50 rounded-lg shadow-inner p-3 h-[80%] border border-gray-200 mb-3;
   }
 
   .completed-exercises-list li {
-    @apply flex flex-col px-2 py-1 bg-primary-300 rounded-[5px] shadow-2 border-b-2 border-b-gray-200 cursor-pointer text-bold text-4;
+    @apply flex flex-col px-3 py-2 bg-white rounded-lg shadow-sm border border-gray-300 cursor-pointer text-bold text-3 text-primary-700 transition-all duration-200 hover:shadow-md hover:border-primary-400 hover:bg-primary-100;
   }
 
   .completed-exercise-info {
-    @apply ml-2 text-3 font-normal;
+    @apply ml-0 mt-1 text-2 font-normal text-gray-700 bg-gray-100 px-2 py-1 rounded-md border-l-4 border-primary-300;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .continue-btn {
-    @apply start-btn-small mt-2 py-1;
+    @apply bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-all duration-200 shadow-md text-3 font-medium tracking-wide cursor-pointer w-auto mx-auto;
+    position: relative;
+    bottom: 0;
+  }
+
+  /* Mobile responsiveness for completed section */
+  @media (max-width: 768px) {
+    .review-exercises {
+      @apply w-[95%] min-h-[75%] max-h-[75%] p-2 my-1;
+    }
+
+    .completed-exercises-list {
+      @apply gap-y-1 p-2;
+    }
+
+    .completed-exercises-list li {
+      @apply px-2 py-1 text-2;
+    }
+
+    .completed-exercise-info {
+      @apply text-1 mt-1 px-2 py-1;
+    }
+
+    .continue-btn {
+      @apply px-3 py-2 text-2 mt-2;
+    }
+
+    .review-container h1 {
+      @apply text-6 pb-1 mb-1;
+    }
+
+    .review-data-section {
+      @apply p-1;
+    }
+
+    .review-data-section .stats-box {
+      @apply p-1;
+    }
+
+    .review-data-section .stats-box .stats-value {
+      @apply text-3;
+    }
+
+    .review-data-section .stats-box .stats-label {
+      @apply text-1;
+    }
   }
 
   /* Workout History */
@@ -1309,19 +1439,22 @@ body {
   }
 
   .stats-boxes {
-    @apply flex flex-row justify-center items-center gap-x-2 w-full h-[35%] relative px-1;
+    @apply flex flex-row justify-center items-center gap-x-3 w-full h-[35%] relative px-2;
   }
 
   .stats-box {
-    @apply flex flex-col items-center justify-center w-[30%] h-[80%] bg-primary-200 rounded-[10px] shadow-3 p-2 relative;
+    @apply flex flex-col items-center justify-center w-[30%] h-[80%] bg-white border border-gray-300 rounded-lg shadow-md p-3 relative overflow-hidden;
   }
 
   .stats-value {
-    @apply text-7 text-bold;
+    @apply text-6 text-bold text-primary-600 leading-tight;
   }
 
   .stats-label {
-    @apply text-2;
+    @apply text-2 text-gray-600 text-center leading-tight mt-1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .graph-toggle-button {
@@ -1548,5 +1681,30 @@ body {
     background-color: lightgray;
     border-radius: 2px;
     scrollbar-gutter: auto;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #7B68EE;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #6E30E8;
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
   }
 }
