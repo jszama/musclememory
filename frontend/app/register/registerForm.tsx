@@ -71,7 +71,7 @@ export default function RegisterPage() {
             }
 
             const data = await response.json();
-            toast.success(data.message);
+            toast.success("Welcome to Muscle Memory!");
             setCookie('user', data.user._id);
             setCookie('token', data.user.token);
 

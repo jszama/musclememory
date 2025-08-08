@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 import checkLogin from '../components/functions/checkLogin'
+import toast from 'react-hot-toast';
 import { setCookie } from '../utils/cookieUtils';
 
 export default function LoginForm() {
@@ -45,7 +46,9 @@ export default function LoginForm() {
         if (remember) {
             localStorage.setItem('user', data.user._id);
             localStorage.setItem('token', data.user.token);
-        }
+		}
+
+		toast.success("Welcome back!");
     }
 
     const login = async (email: string, password: string) => {
