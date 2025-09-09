@@ -131,10 +131,11 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
                                     <button className='remove-exercise-btn' onClick={() => {
                                         if (activeExercises.length > 1) {
                                             const updatedExercises = activeExercises.filter((_, index) => index !== currentExerciseIndex);
-                                    
                                             setActiveExercises(updatedExercises);
                                             setCurrentExerciseIndex(prevIndex => Math.min(prevIndex, updatedExercises.length - 1));
                                         } else {
+                                            setActiveExercises([]);
+                                            setCurrentExerciseIndex(0);
                                             setShowButton(true);
                                         }
                                     }}>
