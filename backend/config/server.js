@@ -23,7 +23,9 @@ app.use((req, res) => {
     res.status(404).json({ message: `Route not found: ${req.originalUrl}` });
 });
 
-app.use((err, req, res, next) => {
+// Error handling middleware
+app.use((err, res) => {
+	// If the error has a status code, use it; otherwise, default to 500
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
     res.status(statusCode);
     res.json({
