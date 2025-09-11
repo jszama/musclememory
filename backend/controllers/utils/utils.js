@@ -4,8 +4,8 @@ const validateUserInput = require('./validateUserInput');
 const hashPassword = require('./hashPassword');
 const validLogin = require('./validLogin');
 const alreadyFriends = require('./alreadyFriends');
-const getUserById = require('./getUserById');
-const getUserByName = require('./getUserByName');
+const getUserNameById = require('./getUserNameById');
+const getUserIdByName = require('./getUserIdByName');
 
 module.exports = {
     generateToken,
@@ -14,6 +14,6 @@ module.exports = {
     hashPassword,
     validLogin,
     alreadyFriends,
-    getUserById,
-    getUserByName
+    getUserNameById,
+    getUserIdByName
 };

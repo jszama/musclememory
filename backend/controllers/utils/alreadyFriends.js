@@ -8,17 +8,17 @@ const alreadyFriends = async (user, friend) => {
         throw error;
     }
 
-    const friends = await Friends.find({ $or: [{ user, friend }, { user: friend, friend: user }] });
+    const isFriends = (await Friends.find({ $or: [{ user, friend }, { user: friend, friend: user }] })).length > 0;
 
-    if (friends.length > 0) {
+    if (isFriends) {
         const error = new Error('Friendship already exists');
         error.statusCode = 401;
         throw error;
     }
 
-    const requests = await FriendRequest.find({ user_id: user, friend_id: friend });
+    const requestAlreadySent = (await FriendRequest.find({ user_id: user, friend_id: friend })).length > 0;
 
-    if (requests.length > 0) {
+    if (requestAlreadySent) {
         const error = new Error('Friend request already sent');
         error.statusCode = 409;
         throw error;

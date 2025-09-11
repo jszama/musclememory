@@ -3,8 +3,7 @@ const CompletedWorkout = require('../models/completedWorkoutModel');
 const addWorkout = async (req, res) => {
     const { user_id, name, exercises } = req.body;
 
-    const workout = await CompletedWorkout 
-    .create({
+    const workout = await CompletedWorkout.create({
         user_id,
         name,
         exercises

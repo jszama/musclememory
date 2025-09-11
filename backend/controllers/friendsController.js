@@ -1,7 +1,7 @@
 const Friends = require('../models/friendsModel');
 const FriendRequest = require('../models/friendRequestModel.js')
 const asyncHandler = require('express-async-handler');
-const { alreadyFriends, getUserById, getUserByName } = require('./utils/utils.js');
+const { alreadyFriends, getUserNameById, getUserIdByName } = require('./utils/utils.js');
 
 const getFriends = asyncHandler(async (req, res) => {
     const friends = await Friends.find({ $or: [{ user_id: req.params.id }, { friend_id: req.params.id }] });
@@ -10,9 +10,9 @@ const getFriends = asyncHandler(async (req, res) => {
     if (n === 0) return res.json([]);
     let data = [n];
 
-    for (let i = 0; i < friends.length; i++) {
+    for (let i = 0; i < n; i++) {
         let friend_user_id = friends[i].user_id === req.params.id ? (friends[i].friend_id) : (friends[i].user_id).toString();
-        data[i] = [friend_user_id, await getUserById(friend_user_id)];
+        data[i] = [friend_user_id, await getUserNameById(friend_user_id)];
     }
 
     res.json(data);
@@ -26,9 +26,9 @@ const getFriendRequests = asyncHandler(async (req, res) => {
 
     let data = [n];
 
-    for (let i = 0; i < requests.length; i++) {
+    for (let i = 0; i < n; i++) {
         let request_sender_user_id = requests[i].user_id.toString();
-        data[i] = [request_sender_user_id, await getUserById(request_sender_user_id)];
+        data[i] = [request_sender_user_id, await getUserNameById(request_sender_user_id)];
     }
 
     res.json(data);
@@ -38,22 +38,22 @@ const sendRequest = asyncHandler(async (req, res) => {
     let { user, friend } = req.body;
 
     try {
-        friend = await getUserByName(friend);
-    } catch (error) {
+        friend = await getUserIdByName(friend);
+    } catch {
         res.status(404).json({ error: 'User not found' });
-            return;
+		return;
     }
 
     try {
         await alreadyFriends(user, friend);
     } catch (error) {
-        console.error(error);
         res.status(error.statusCode || 500).json({ error: error.message });
         return;
     }
 
-    try {
-        if (await FriendRequest.findOne({ user_id: friend, friend_id: user })) {
+	try {
+		const existingRequestFromTarget = await FriendRequest.findOne({ user_id: friend, friend_id: user });
+        if ( existingRequestFromTarget ) {
             await acceptRequest({ body: { user: friend, friend: user } }, res);
         } else {
             const newFriendRequest = await FriendRequest.create({
@@ -88,7 +88,7 @@ const acceptRequest = asyncHandler(async (req, res) => {
         friend_id: friend
     });
 
-    const converted = [newFriend.friend_id, getUserById(newFriend.friend_id)];
+    const converted = [newFriend.friend_id, getUserNameById(newFriend.friend_id)];
 
     res.status(201).json(converted);
 });

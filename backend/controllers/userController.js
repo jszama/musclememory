@@ -4,7 +4,6 @@ const asyncHandler = require('express-async-handler');
 const { validateUserInput, validateExists, hashPassword, validLogin, generateToken } = require('./utils/utils.js');
 const { uploadFile } = require('../config/upload');
 
-// Register a new user
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -36,8 +35,6 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 }
 );
-
-// Login a user
 
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password, remember } = req.body;
@@ -85,7 +82,6 @@ const getLoggedInUser = asyncHandler(async (req, res) => {
     }
 });
 
-// Update user profile
 const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
