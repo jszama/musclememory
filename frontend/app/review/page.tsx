@@ -1,7 +1,7 @@
 'use client';
 
 import { CompletedWorkout } from "../components/interfaces";
-import React, { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ export default function ReviewScreen() {
 function ReviewContent() {
     const searchParams = useSearchParams();
 
-    const completedWorkout = React.useMemo(() => {
+    const completedWorkout = useMemo(() => {
         const workout = searchParams.get('workout');
         try {
             return workout ? (JSON.parse(workout) as CompletedWorkout) : null;

@@ -1,4 +1,3 @@
-
 import { getUserIdFromCookie, getTokenFromCookie } from "../../utils/cookieUtils";
 
 async function fetchUser() {

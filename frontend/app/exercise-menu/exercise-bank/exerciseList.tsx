@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Exercise } from '@/app/components/interfaces';
 
 export default function ExerciseList() {
@@ -8,7 +8,6 @@ export default function ExerciseList() {
     const [resistance, setResistance] = useState('');
     const [angle, setAngle] = useState('');
 
-    const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([]);
     const [groupedExercises, setGroupedExercises] = useState<Record<string, Exercise[]>>({});
     
     const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
@@ -34,7 +33,6 @@ export default function ExerciseList() {
             (resistance === '' || exercise.resistance === resistance) &&
             (angle === '' || exercise.angle === angle)
         );
-        setFilteredExercises(filteredExercises);
         groupExercises(filteredExercises);
     }
 
@@ -51,7 +49,6 @@ export default function ExerciseList() {
             .then(response => response.json())
             .then(data => {
                 setExercises(data);
-                setFilteredExercises(data);
                 groupExercises(data);
             })
             .catch(error => console.error('Error fetching exercises:', error));
@@ -108,7 +105,7 @@ export default function ExerciseList() {
                             <div className="exercise-block" key={letter}>
                                 <h2>{letter}</h2>
                                 {exercises.map((exercise) => (
-                                    <div className={`exercise-card ${selectedExercise === exercise ? 'exercise-selected' : ''}`} key={exercise.name} onClick={() => handleDescription(exercise)}>
+                                    <div className={`exercise-card ${selectedExercise === exercise && 'exercise-selected'}`} key={exercise.name} onClick={() => handleDescription(exercise)}>
                                         <h3>{exercise.name}</h3>
                         
                                         {selectedExercise === exercise &&

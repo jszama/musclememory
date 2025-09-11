@@ -1,5 +1,5 @@
 import { Exercise } from "@/app/components/interfaces";
-import { Dispatch, SetStateAction, use, useEffect, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { getUserIdFromCookie, validateAuthData } from "@/app/utils/cookieUtils";
 
@@ -16,7 +16,6 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
     const CreateWorkout = () => {
         const workoutTitleInput = document.querySelector('.workout-title-input') as HTMLInputElement;
         
-        // Validate authentication data first
         if (!validateAuthData()) {
             console.error('Invalid authentication data, cannot create workout');
             return;
@@ -34,13 +33,10 @@ export default function WorkoutCreator({ exercisesPicked, pickMode, setPickMode 
                 name: (workoutTitleInput?.value || 'Unnamed Workout'),
                 exercises: exercisesPicked,
             }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                exercisesPicked.splice(0, exercisesPicked.length);
-                router.push('/exercise-menu/workouts');
-            });
-
+        }).then(() => {
+			exercisesPicked.splice(0, exercisesPicked.length);
+			router.push('/exercise-menu/workouts');
+		});
     }
 
     return (

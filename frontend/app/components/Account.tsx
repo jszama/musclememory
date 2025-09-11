@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import checkLogin from './functions/checkLogin';
@@ -13,8 +13,6 @@ export default function Account() {
     }, [isSignedIn]);
 
     return (
-        <>
-            <Link href={href}><Image src="/user.png" alt="account-logo" height={64} width={64} /></Link>
-        </>
+		<Link href={href}><Image src="/user.png" alt="account-logo" height={64} width={64} /></Link>
     );
 }

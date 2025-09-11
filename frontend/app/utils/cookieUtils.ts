@@ -1,6 +1,3 @@
-// Utility functions for safe cookie operations in client-side components
-
-// Function to validate if a string is a valid MongoDB ObjectId format
 const isValidObjectId = (id: string): boolean => {
   return /^[0-9a-fA-F]{24}$/.test(id);
 };
@@ -53,7 +50,6 @@ export const isUserLoggedIn = (): boolean => {
 export const setCookie = (name: string, value: string, days?: number): void => {
   if (typeof window === 'undefined') return;
   try {
-    // Ensure the value is clean and trimmed
     const cleanValue = String(value).trim();
     
     // For user IDs, validate they're proper ObjectIds
@@ -84,16 +80,6 @@ export const deleteCookie = (name: string): void => {
   }
 };
 
-// Debug function to inspect cookie contents
-export const debugCookies = (): void => {
-  if (typeof window === 'undefined') return;
-  console.log('All cookies:', document.cookie);
-  console.log('User ID:', getUserIdFromCookie());
-  console.log('Token:', getTokenFromCookie());
-  console.log('Is logged in:', isUserLoggedIn());
-};
-
-// Function to clear all authentication data
 export const clearAuthData = (): void => {
   deleteCookie('user');
   deleteCookie('token');
@@ -103,7 +89,6 @@ export const clearAuthData = (): void => {
   }
 };
 
-// Function to validate and fix authentication data
 export const validateAuthData = (): boolean => {
   const userId = getUserIdFromCookie();
   const token = getTokenFromCookie();

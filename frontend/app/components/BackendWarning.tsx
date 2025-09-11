@@ -7,26 +7,22 @@ export default function BackendWarning() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    // Check if user has seen the warning in this session
     const hasSeenWarning = sessionStorage.getItem('backendWarningShown');
     
     if (!hasSeenWarning) {
       sessionStorage.setItem('backendWarningShown', 'true');
       
-      // Set a timeout to show warning if backend doesn't respond in 3 seconds
       const warningTimeout = setTimeout(() => {
         setIsVisible(true);
       }, 3000);
 
-      // Make a wake-up call to the backend
       wakeUpBackend(warningTimeout);
     }
   }, []);
 
   const wakeUpBackend = async (warningTimeout: NodeJS.Timeout) => {
     try {
-      // Use a simple GET request to wake up the backend
-      const response = await fetch(`https://musclememory-backend.onrender.com/api/exercises`, {
+      await fetch(`https://musclememory-backend.onrender.com/api/exercises`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -34,9 +30,7 @@ export default function BackendWarning() {
       });
       
       // If we get a response, cancel the warning timeout
-      clearTimeout(warningTimeout);
-      console.log('Backend wake-up call completed - warning prevented');
-      
+      clearTimeout(warningTimeout);      
     } catch (error) {
       console.log('Backend wake-up call failed (this is expected if server is cold):', error);
       // Don't clear the timeout if there's an error - let the warning show

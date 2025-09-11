@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Guest from './Guest';
 import LoggedIn from './LoggedIn';
 import { isUserLoggedIn } from '../utils/cookieUtils';

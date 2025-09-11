@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Workout, Exercise, CompletedWorkout, ActiveExercise } from '../components/interfaces';
+import { useEffect, useState } from 'react';
+import type { Workout, Exercise, CompletedWorkout, ActiveExercise } from '../components/interfaces';
 import ExercisePicker from './exercisePicker';
 import ExerciseScreen from './exerciseScreen';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,7 @@ interface WorkoutPickerProps {
 
 export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerProps) {
     const router = useRouter();
-    const selectedWorkout = pickedWorkout[0] as Workout;
+    const selectedWorkout = pickedWorkout[0];
 
     const [userId, setUserId] = useState<string>('');
 
@@ -196,7 +196,7 @@ export default function StartWorkout({ pickedWorkout, loggedIn }: WorkoutPickerP
                 }}
             >
                 Finish
-                </button>
+			</button>
         </div>
     );
 }

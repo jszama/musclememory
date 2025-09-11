@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google'
 import "./globals.css";
-import React from "react";
 
 import Header from "./components/Header";
 import BackButton from "./components/BackButton";
@@ -9,6 +8,7 @@ import BackendWarning from "./components/BackendWarning";
 
 // import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from 'react-hot-toast';
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "MuscleMemory",
@@ -23,24 +23,20 @@ const roboto = Roboto({
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
-
-
   return (
-    <>
-      <html lang="en">
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </head>
-        <body className={roboto.className}>
-          <BackendWarning />
-          <Header/>
-          {children}
-          <BackButton />
-          <Toaster/>
-        </body>
-      </html>
-    </>
+	<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body className={roboto.className}>
+		<BackendWarning />
+		<Header/>
+		{children}
+		<BackButton />
+		<Toaster/>
+	</body>
+	</html>
   );
 }

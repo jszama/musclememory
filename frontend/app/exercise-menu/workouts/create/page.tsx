@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Exercise } from "@/app/components/interfaces";
 
 import ExercisePicker from './exercisePicker';
 import WorkoutCreater from './workoutCreater';
-const exercises: Exercise[] = [];
 
+const exercises: Exercise[] = [];
 
 export default function CreateWorkout() {
     const [pickMode, setPickMode] = useState(false);

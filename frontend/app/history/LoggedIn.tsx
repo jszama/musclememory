@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { CompletedWorkout } from "../components/interfaces"
 import { getUserIdFromCookie } from "../utils/cookieUtils"
 
@@ -18,7 +18,6 @@ export default function LoggedIn() {
                     setHistory(data)
                     setIsLoading(false)
                  })
-                .catch(err => console.error(err))
         }
     }, [])
 

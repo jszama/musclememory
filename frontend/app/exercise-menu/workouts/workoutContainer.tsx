@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
-import { Workout } from '@/app/components/interfaces';
+import type { Workout } from '@/app/components/interfaces';
 import WorkoutList from './workoutList';
 import FirstWorkout from './firstWorkout';
-import { useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { getUserIdFromCookie } from '@/app/utils/cookieUtils';
 
 export default function WorkoutContainer() {

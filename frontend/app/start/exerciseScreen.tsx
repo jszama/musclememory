@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ActiveExercise } from '../components/interfaces';
+import { useEffect, useState } from 'react';
+import type { ActiveExercise } from '../components/interfaces';
 
 interface ExerciseScreenProps {
     exercise: ActiveExercise;

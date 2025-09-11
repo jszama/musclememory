@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { Exercise } from '@/app/components/interfaces';
 
 interface WorkoutCreatorProps {
@@ -15,7 +15,6 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
     const [resistance, setResistance] = useState('');
     const [angle, setAngle] = useState('');
 
-    const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([]);
     const [groupedExercises, setGroupedExercises] = useState<Record<string, Exercise[]>>({});
     
     const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
@@ -41,7 +40,6 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
             (resistance === '' || exercise.resistance === resistance) &&
             (angle === '' || exercise.angle === angle)
         );
-        setFilteredExercises(filteredExercises);
         groupExercises(filteredExercises);
     }
 
@@ -58,7 +56,6 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
             .then(response => response.json())
             .then(data => {
                 setExercises(data);
-                setFilteredExercises(data);
                 groupExercises(data);
             })
             .catch(error => console.error('Error fetching exercises:', error));
@@ -117,7 +114,7 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
                                 {exercises.map((exercise) => (
                                     <div className={`add-exercise-card ${selectedExercise === exercise ? 'exercise-selected' : ''}`} key={exercise.name}>
                                         <div className='flex flex-row justify-between w-full'>
-                                            <h3 className='cursor-pointer'   onClick={() => handleDescription(exercise)}>{exercise.name}</h3>
+                                            <h3 className='cursor-pointer' onClick={() => handleDescription(exercise)}>{exercise.name}</h3>
 
                                             <button className='add-exercise' onClick={() => {
                                                 exercisesPicked.push(exercise);

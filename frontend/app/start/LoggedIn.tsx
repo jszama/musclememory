@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Workout } from '../components/interfaces'
+import { useEffect, useState } from 'react'
+import type { Workout } from '../components/interfaces'
 
 import WorkoutPicker from './WorkoutPicker'
 import StartWorkout from './StartWorkout'
@@ -21,7 +21,8 @@ export default function LoggedIn() {
             {start ?
                 <StartWorkout pickedWorkout={pickedWorkout} loggedIn={true} />
                 :
-                <WorkoutPicker pickedWorkout={pickedWorkout} setPickedWorkout={setPickedWorkout} />}
+				<WorkoutPicker pickedWorkout={pickedWorkout} setPickedWorkout={setPickedWorkout} />
+			}
         </>
     )
 }

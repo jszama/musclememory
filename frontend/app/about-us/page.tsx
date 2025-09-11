@@ -1,10 +1,6 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
+import Link  from 'next/link';
 
 export default function About() {
-    const router = useRouter();
-
     return (
         <main className="about-page">
             <div className='about-content'>
@@ -40,10 +36,10 @@ export default function About() {
                 <article>
                     Ready to get started? Create an account and start tracking your workouts today!
                 </article>
-            
-                <button className="about-sign-up-btn" onClick={() => router.push('/account')}>
+
+                <Link className="about-sign-up-btn" href="/account">
                     SIGN UP
-                </button>
+                </Link>
             </section>
             </div>
         </main>

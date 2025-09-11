@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Exercise } from '../components/interfaces';
+import { useState } from 'react';
+import type { Exercise } from '../components/interfaces';
 import StartWorkout from './StartWorkout';
 
 export default function Guest() {
@@ -18,10 +18,9 @@ export default function Guest() {
     }
 
     return (
-    <>
-        { start ?
+        start ?
             <StartWorkout pickedWorkout = { pickedWorkout } loggedIn={false} />
-        :(
+        : (
             <div className="guest-screen">
                 <p>
                     Create an account to be able to create your own workouts and access our full range of services!
@@ -30,7 +29,6 @@ export default function Guest() {
                     CONTINUE
                 </button>
             </div>
-        )}
-    </>
         )
-    }
+	)
+}

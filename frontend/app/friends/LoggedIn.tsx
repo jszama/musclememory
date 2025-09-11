@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { getUserIdFromCookie } from "../utils/cookieUtils"
 
 export default function LoggedIn() {
@@ -14,16 +14,16 @@ export default function LoggedIn() {
     const [showRequests, setShowRequests] = useState<boolean>(false)
 
     useEffect(() => {
-        const fetchData = () => {
+        const fetchData = async () => {
             const userId = getUserIdFromCookie();
             if (userId) {
                 try {
-                    fetch(`https://musclememory-backend.onrender.com/api/friends/${userId}`).then(response => response.json()).then(data => {
+                    await fetch(`https://musclememory-backend.onrender.com/api/friends/${userId}`).then(response => response.json()).then(data => {
                         setFriends(data)
                         setIsLoading(false);
                     });
-                    
-                    fetch(`https://musclememory-backend.onrender.com/api/friends/requests/${userId}`).then(response => response.json()).then(data => {
+
+                    await fetch(`https://musclememory-backend.onrender.com/api/friends/requests/${userId}`).then(response => response.json()).then(data => {
                         setFriendRequests(data)
                     });
                 } catch (err) {
@@ -62,9 +62,8 @@ export default function LoggedIn() {
             } else {
                 setError('Friend request sent');
             }
-        } catch (err) {
+        } catch {
             setError('Network error');
-            console.error('Network error:', err);
         }
     };
     
@@ -91,7 +90,7 @@ export default function LoggedIn() {
                 }
             })
             .catch((err) => {
-                setError( err.message)
+                setError(err.message)
             })
     }
 
@@ -141,9 +140,9 @@ export default function LoggedIn() {
                 </div>
                 <button className='request-tab-btn' onClick={() => setShowRequests(!showRequests)}>FRIENDS</button>
                 </>
-                )
-                :
-                (
+			)
+			:
+			(
                 <>
                 <h1>Friends</h1>
                 <div className="friends-info">

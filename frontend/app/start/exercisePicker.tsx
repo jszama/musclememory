@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { Exercise, ActiveExercise } from '@/app/components/interfaces';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import type { Exercise, ActiveExercise } from '@/app/components/interfaces';
 
 interface WorkoutCreatorProps {
     exercisesPicked: ActiveExercise[];
@@ -15,7 +15,6 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
     const [resistance, setResistance] = useState('');
     const [angle, setAngle] = useState('');
 
-    const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([]);
     const [groupedExercises, setGroupedExercises] = useState<Record<string, Exercise[]>>({});
     
     const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
@@ -41,7 +40,6 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
             (resistance === '' || exercise.resistance === resistance) &&
             (angle === '' || exercise.angle === angle)
         );
-        setFilteredExercises(filteredExercises);
         groupExercises(filteredExercises);
     }
 
@@ -58,7 +56,6 @@ export default function ExercisePicker({ exercisesPicked, pickMode, setPickMode 
             .then(response => response.json())
             .then(data => {
                 setExercises(data);
-                setFilteredExercises(data);
                 groupExercises(data);
             })
             .catch(error => console.error('Error fetching exercises:', error));

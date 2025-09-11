@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Workout } from '../components/interfaces';
+import { useState, useEffect } from 'react';
+import type { Workout } from '../components/interfaces';
 import { getUserIdFromCookie } from '../utils/cookieUtils';
 
 interface WorkoutPickerProps {

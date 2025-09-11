@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Workout, Exercise } from '../../components/interfaces';
+import { useState } from 'react';
+import type { Workout, Exercise } from '../../components/interfaces';
 
 export default function WorkoutList({ workoutsProp }: { workoutsProp: Workout[] }) {
     const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
@@ -25,18 +25,17 @@ export default function WorkoutList({ workoutsProp }: { workoutsProp: Workout[] 
                                     'Content-Type': 'application/json',
                                 }
                             })
-                                .then(response => response.json())
-                                .then(data => {
+                                .then(() => {
                                     window.location.reload();
                                 })
                                 .catch((error) => {
                                     console.error('Error:', error);
                                 });
-                                    }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="15" y1="9" x2="9" y2="15" />
-                        <line x1="9" y1="9" x2="15" y2="15" />
-                        </svg>
+						}}>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+								<line x1="15" y1="9" x2="9" y2="15" />
+								<line x1="9" y1="9" x2="15" y2="15" />
+							</svg>
                         </button>
                     </div>
                     <div className={`${selectedWorkout === workout ? 'display-exercises' : 'hidden'}`}>
@@ -52,12 +51,10 @@ export default function WorkoutList({ workoutsProp }: { workoutsProp: Workout[] 
     }
     
     return (
-        <>
         <section className="workout-bank">
-                <section className="workout-list">
-                    {workoutList()}
-                </section>
+			<section className="workout-list">
+				{workoutList()}
+			</section>
         </section>
-        </>
     );
 }

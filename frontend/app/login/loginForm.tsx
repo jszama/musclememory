@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 import checkLogin from '../components/functions/checkLogin'
@@ -17,7 +17,6 @@ export default function LoginForm() {
     useEffect(() => {
         if (checkLogin()) {
             router.replace('/account')
-            return;
         }
     }, [])
 

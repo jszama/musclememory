@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import checkLogin from '../components/functions/checkLogin';
 import toast from 'react-hot-toast';
@@ -12,7 +12,6 @@ export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -58,11 +57,11 @@ export default function RegisterPage() {
         try {
             setLoading(true);
             const response = await fetch(`https://musclememory-backend.onrender.com/api/user/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, password })
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ name, email, password })
             })
 
             if (!response.ok) {
@@ -111,8 +110,6 @@ export default function RegisterPage() {
                 (e) => setConfirmPassword(e.target.value)
             } />
             
-            <p className='error'>{error}</p>
-
             {/* Ternary operator to show loading state */}
             <button type="submit" disabled={loading} className={`${loading} ? 'cursor-now-allowed': 'cursor-pointer'`}>{loading ? 'Loading...' : 'Register'}</button>
         </form>

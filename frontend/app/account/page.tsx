@@ -1,14 +1,14 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { User } from '../components/interfaces'; 
 import checkLogin from '../components/functions/checkLogin';
 import Link from 'next/link';
-import { getUserIdFromCookie, deleteCookie, getTokenFromCookie, debugCookies, validateAuthData } from '../utils/cookieUtils';
+import { getUserIdFromCookie, deleteCookie, getTokenFromCookie, validateAuthData } from '../utils/cookieUtils';
 
-export default React.memo(function AccountPage() {
+export default memo(function AccountPage() {
     const [user, setUser] = useState({} as User);
     const [isEditing, setIsEditing] = useState(false);
     const [changedBio, setChangedBio] = useState(false);
@@ -19,11 +19,6 @@ export default React.memo(function AccountPage() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                // Debug cookies first
-                console.log('=== Debug Cookie Information ===');
-                debugCookies();
-                
-                // Validate authentication data
                 if (!validateAuthData()) {
                     router.replace('/login');
                     return;
@@ -104,12 +99,11 @@ export default React.memo(function AccountPage() {
                 });
 
                 if (!response.ok) throw new Error('Failed to update bio');
-                const data = await response.json();
+                await response.json();
                 setError('Bio updated.');
                 setChangedBio(false);
             } catch (error: any) {
                 setError(error.message || 'An error occurred during the request.');
-                console.error(error);
             } finally {
                 setIsEditing(false);
             }
@@ -146,12 +140,11 @@ export default React.memo(function AccountPage() {
             });
     
             if (!response.ok) throw new Error('Failed to update profile picture');
-            const data = await response.json();
+            await response.json();
             setError('Profile picture updated.');
             setProfilePicture(URL.createObjectURL(file));
         } catch (error: any) {
             setError(`An error occurred during the request: ${error.message}`);
-            console.error(error);
         }
     };
     
@@ -167,9 +160,7 @@ export default React.memo(function AccountPage() {
                                 <p className='account-info-email'>{user.email}</p>
                             </>
                         ) : (
-                            <>
-                                <span className='loading-bar'></span>  
-                            </>    
+							<span className='loading-bar'></span>  
                         )}
                         
                         <div className='account-bio-box'>

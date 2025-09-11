@@ -1,7 +1,7 @@
 'use client';
 
+import { memo } from 'react';
 import Image from 'next/image';
-import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 function BackButton() {
@@ -10,8 +10,7 @@ function BackButton() {
     const isHomePage = (pathname === '/');
 
     return (
-    <>
-        {!isHomePage && 
+        !isHomePage && 
             <div className='back-button'>
                 <Image
                     className='back-btn'
@@ -24,9 +23,7 @@ function BackButton() {
                     }}
                 />
             </div>
-        }
-    </>
     );
 }
 
-export default React.memo(BackButton);
+export default memo(BackButton);
