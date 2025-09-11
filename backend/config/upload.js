@@ -20,8 +20,7 @@ const uploadFile = async (fileBuffer, user_id) => {
   };
 
   try {
-    const command = new PutObjectCommand(params);
-    const response = await s3Client.send(command);
+    await s3Client.send(new PutObjectCommand(params));
     return `https://${params.Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`;
   } catch (error) {
     throw new Error(`File upload failed: ${error.message}`);
